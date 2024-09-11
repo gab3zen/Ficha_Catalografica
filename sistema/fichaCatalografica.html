@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"/>    
+    <title>Ficha Catalográfica</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="cabecalho">
+                <div class="imagem">
+                    <p><a href="https://ifrs.edu.br/feliz/" target="_blank"><img alt="Logo-IFRS" src="Logo-IFRS-cores-sem-fundo-Vertical.png" /></a></p>
+                </div>
+
+                <div class="link">
+                    <p><a href="https://ifrs.edu.br/feliz/" target="_blank">
+                        Instituto Federal de Educação, Ciência e Técnologia do Rio Grande do Sul - Campus Feliz</a>
+                    </p>
+                    <p><a href="https://biblioteca.ifrs.edu.br/" target="_blank">
+                        Sistema Pergamum - Biblioteca</a>
+                    </p>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="formulario">
+                <form action="ficha.php" method="post">
+                    <label><h1>Dados para Ficha Catalográfica</h1></label>
+                    <div class="autor">
+                        <label>Autor</label>
+                        <p>Nome:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
+                            <input 
+                            id="nome" 
+                            type="text" 
+                            name="nome">
+                            (Exemplo: Ana Luiza)
+                        </p>
+                        <p>Sobreome:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
+                            <input 
+                            id="sobrenome" 
+                            type="text" 
+                            name="sobrenome">
+                            (Digite seu ultimo sobrenome. Exemplo: Soares)
+                        </p>    
+                    </div>
+                    <div class="tituloTrabalho">
+                        <p>Título do trabalho:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
+                            <input 
+                            id="tituloTrabalho" 
+                            type="text" 
+                            name="tituloTrabalho">
+                        </p>
+                    </div>
+                    <div class="posGraduacao">
+                        <label>Pós-Graduação</label>
+                        
+                    </div>
+                </form>
+
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </div>
+</body>
+</html>
