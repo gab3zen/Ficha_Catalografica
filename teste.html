@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"/>    
+    <title>Ficha Catalográfica</title>
+    <script>
+        function mostrarDescricao() {
+            const selectElement = document.getElementById('escolaridade');
+            const descricao = document.getElementById('descricao');
+            const selectedOption = selectElement.value;
+
+            if (selectedOption === 'tese doutorado') {
+                descricao.innerHTML = 'A tese de doutorado é o trabalho final de um doutorado, que representa uma contribuição original para o conhecimento científico.';
+            } else if (selectedOption === 'mestrado') {
+                descricao.innerHTML = 'O trabalho de mestrado é uma pesquisa avançada, que demonstra conhecimento aprofundado em um tema específico.';
+            } else if (selectedOption === 'relatorio') {
+                descricao.innerHTML = 'O relatório é um documento técnico que descreve o andamento ou conclusão de um trabalho ou projeto.';
+            } else {
+                descricao.innerHTML = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="cabecalho">
+                <div class="imagem">
+                    <p><a href="https://ifrs.edu.br/feliz/" target="_blank"><img alt="Logo-IFRS" src="Logo-IFRS-cores-sem-fundo-Vertical.png" /></a></p>
+                </div>
+
+                <div class="link">
+                    <p><a href="https://ifrs.edu.br/feliz/" target="_blank">
+                        Instituto Federal de Educação, Ciência e Técnologia do Rio Grande do Sul - Campus Feliz</a>
+                    </p>
+                    <p><a href="https://biblioteca.ifrs.edu.br/" target="_blank">
+                        Sistema Pergamum - Biblioteca</a>
+                    </p>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="formulario">
+                <form action="ficha.php" method="post">
+                    <h1>Dados para Ficha Catalográfica</h1>
+                    <div class="tituloTrabalho">
+                        <p>Título do trabalho:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
+                            <input 
+                            id="tituloTrabalho" 
+                            type="text" 
+                            name="tituloTrabalho"
+                            >
+                        </p>
+                    </div>
+                    <div class="autor">
+                        <fieldset>
+                            <p>Autor</p>
+                                Nome:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
+                                <input 
+                                id="nome" 
+                                type="text" 
+                                name="nome"
+                                >
+                                (Exemplo: Ana Luiza)
+                                Sobrenome:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
+                                <input 
+                                id="sobrenome" 
+                                type="text" 
+                                name="sobrenome"
+                                >
+                                (Digite seu ultimo sobrenome. Exemplo: Soares)
+                        </fieldset>
+                    </div>
+                    Escolaridade:
+                    <select id="escolaridade" onchange="mostrarDescricao()">
+                        <option value="selecione">Selecione</option>
+                        <option value="mestrado">Mestrado</option>
+                        <option value="tese doutorado">Tese Doutorado</option>
+                        <option value="relatorio">Relatório</option>
+                    </select>
+
+                    <div id="descricao" style="margin-top: 20px; font-style: italic;"></div>
+
+                </form>
+            </div>
+        </main>
+        <footer>
+            <input type="text" aria-label="Nome completo" name="nomeCompleto">
+
+        </footer>
+    </div>
+</body>
+</html>

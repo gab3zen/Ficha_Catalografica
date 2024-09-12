@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"/>    
+    <link rel="stylesheet" href="styles.css"/>
+    <script>
+        function mostrarFormulario() {
+            const selectElement = document.getElementById('modalidade');
+            const formulario = document.getElementById('formulario');
+            const selectedOption = selectElement.value;
+
+            if (selectedOption === 'Mestrado') {
+                formulario.innerHTML = 'A tese de doutorado é o trabalho final de um doutorado, que representa uma contribuição original para o conhecimento científico.';
+            } else {
+                formulario.innerHTML = '';
+            }
+        }
+    </script>    
     <title>Ficha Catalográfica</title>
 </head>
 <body>
@@ -27,25 +40,8 @@
         <main>
             <div class="formulario">
                 <form action="ficha.php" method="post">
-                    <label><h1>Dados para Ficha Catalográfica</h1></label>
-                    <div class="autor">
-                        <label>Autor</label>
-                        <p>Nome:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
-                            <input 
-                            id="nome" 
-                            type="text" 
-                            name="nome">
-                            (Exemplo: Ana Luiza)
-                        </p>
-                        <p>Sobreome:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
-                            <input 
-                            id="sobrenome" 
-                            type="text" 
-                            name="sobrenome">
-                            (Digite seu ultimo sobrenome. Exemplo: Soares)
-                        </p>    
-                    </div>
-                    <div class="tituloTrabalho">
+                    <h1>Dados para Ficha Catalográfica</h1>
+                    <div class="tituloTrabalho"></div>
                         <p>Título do trabalho:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
                             <input 
                             id="tituloTrabalho" 
@@ -53,10 +49,38 @@
                             name="tituloTrabalho">
                         </p>
                     </div>
-                    <div class="posGraduacao">
-                        <label>Pós-Graduação</label>
-                        
+                    <div class="autor">
+                        <p>Autor</p>
+                        <label for="nome">
+                            Nome:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
+                            <input 
+                            id="nome" 
+                            type="text" 
+                            name="nome"
+                            >
+                            (Exemplo: Ana Luiza)
+                        </label>
+                        <label for="sobrenome">Sobrenome:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
+                            <input 
+                            id="sobrenome" 
+                            type="text" 
+                            name="sobrenome"
+                            >
+                            (Digite seu ultimo sobrenome. Exemplo: Soares)
+                        </label>    
                     </div>
+                    <div class="modalidade">
+                        <label for="modalidade">
+                            Modalidade:
+                            <select id="modalidade" onchange="mostrarFormulario()">
+                                <option value="">(Selecione)</option>
+                                <option value="Pós-Graduação">Pós-Graduação</option>
+                                <option value="Especialização">Especialização</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div id="formulario"></div>
+
                 </form>
 
             </div>
