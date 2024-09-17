@@ -3,93 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"/>    
-    <title>Ficha Catalográfica</title>
+    <title>Teste Titleize</title>
     <script>
-        function mostrarDescricao() {
-            const selectElement = document.getElementById('escolaridade');
-            const descricao = document.getElementById('descricao');
-            const selectedOption = selectElement.value;
-
-            if (selectedOption === 'tese doutorado') {
-                descricao.innerHTML = 'A tese de doutorado é o trabalho final de um doutorado, que representa uma contribuição original para o conhecimento científico.';
-            } else if (selectedOption === 'mestrado') {
-                descricao.innerHTML = 'O trabalho de mestrado é uma pesquisa avançada, que demonstra conhecimento aprofundado em um tema específico.';
-            } else if (selectedOption === 'relatorio') {
-                descricao.innerHTML = 'O relatório é um documento técnico que descreve o andamento ou conclusão de um trabalho ou projeto.';
-            } else {
-                descricao.innerHTML = '';
+        // Função titleize a ser testada
+        function titleize(text) {
+            var loweredText = text.toLowerCase();
+            var words = loweredText.split(" ");
+            for (var a = 0; a < words.length; a++) {
+                var w = words[a];
+                if (w) { // Verifica se a palavra não é uma string vazia
+                    var firstLetter = w[0];
+                    w = firstLetter.toUpperCase() + w.slice(1);
+                    words[a] = w;
+                }
             }
+            return words.join(" ");
+        }
+
+        // Função para capturar o texto do usuário e exibir o resultado
+        function testarTitleize() {
+            // Pega o valor do input
+            var inputText = document.getElementById('inputTexto').value;
+            
+            // Aplica a função titleize
+            var result = titleize(inputText);
+            
+            // Exibe o resultado no parágrafo abaixo
+            document.getElementById('resultado').innerText = result;
         }
     </script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="cabecalho">
-                <div class="imagem">
-                    <p><a href="https://ifrs.edu.br/feliz/" target="_blank"><img alt="Logo-IFRS" src="Logo-IFRS-cores-sem-fundo-Vertical.png" /></a></p>
-                </div>
+    <h1>Teste da Função Titleize</h1>
 
-                <div class="link">
-                    <p><a href="https://ifrs.edu.br/feliz/" target="_blank">
-                        Instituto Federal de Educação, Ciência e Técnologia do Rio Grande do Sul - Campus Feliz</a>
-                    </p>
-                    <p><a href="https://biblioteca.ifrs.edu.br/" target="_blank">
-                        Sistema Pergamum - Biblioteca</a>
-                    </p>
-                </div>
-            </div>
-        </header>
-        <main>
-            <div class="formulario">
-                <form action="ficha.php" method="post">
-                    <h1>Dados para Ficha Catalográfica</h1>
-                    <div class="tituloTrabalho">
-                        <p>Título do trabalho:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
-                            <input 
-                            id="tituloTrabalho" 
-                            type="text" 
-                            name="tituloTrabalho"
-                            >
-                        </p>
-                    </div>
-                    <div class="autor">
-                        <fieldset>
-                            <p>Autor</p>
-                                Nome:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
-                                <input 
-                                id="nome" 
-                                type="text" 
-                                name="nome"
-                                >
-                                (Exemplo: Ana Luiza)
-                                Sobrenome:<span class="marcaCampoObrigatorio" title="Preenchimento Obrigatório.">*</span>
-                                <input 
-                                id="sobrenome" 
-                                type="text" 
-                                name="sobrenome"
-                                >
-                                (Digite seu ultimo sobrenome. Exemplo: Soares)
-                        </fieldset>
-                    </div>
-                    Escolaridade:
-                    <select id="escolaridade" onchange="mostrarDescricao()">
-                        <option value="selecione">Selecione</option>
-                        <option value="mestrado">Mestrado</option>
-                        <option value="tese doutorado">Tese Doutorado</option>
-                        <option value="relatorio">Relatório</option>
-                    </select>
+    <label for="inputTexto">Insira um texto:</label>
+    <input type="text" id="inputTexto" placeholder="Digite algo...">
+    <button onclick="testarTitleize()">Testar Titleize</button>
 
-                    <div id="descricao" style="margin-top: 20px; font-style: italic;"></div>
-
-                </form>
-            </div>
-        </main>
-        <footer>
-            <input type="text" aria-label="Nome completo" name="nomeCompleto">
-
-        </footer>
-    </div>
+    <h2>Resultado:</h2>
+    <p id="resultado">O resultado aparecerá aqui...</p>
 </body>
 </html>
