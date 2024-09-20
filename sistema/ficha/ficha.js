@@ -43,11 +43,34 @@ function adicionarAssunto() {
 
     // Se o contador for igual a 5, esconde o botão
     if (contadorAssuntos === 5) {
-        document.getElementById('botaoAdicionarAssunto').style.display = 'none';
+        document.getElementById('ibotaoAdicionarAssunto').style.display = 'none';
+    }
+    if(contadorAssuntos > 1){
+        document.getElementById('ibotaoRemoverAssunto').style.display = 'inline';
+    }
+}
+function removerAssunto() {
+    if (contadorAssuntos > 1) {
+        const divAssuntos = document.getElementById('divAssuntos');
+        
+        // Remove os últimos inputs de nome e sobrenome adicionados
+        divAssuntos.removeChild(divAssuntos.lastChild);
+
+        contadorAssuntos--; // Decrementa o contador
+
+        // Esconde o botão "Remover Coorientador" se restar apenas 1 coorientador
+        if (contadorAssuntos === 1) {
+            document.getElementById('ibotaoRemoverAssuntos').style.display = 'none';
+        }
+
+        // Se o número de coorientadores for menor que 5, reexibe o botão de adicionar
+        if (contadorAssuntos < 5) {
+            document.getElementById('ibotaoAdicionarAssunto').style.display = 'inline';
+        }
     }
 }
 
-let contadorCoorientador = 1; // Inicia com 1 porque já existe um campo de coorientador
+let contadorCoorientador = 1; // Começa com 1 porque já existe um campo de coorientador
 
 // Função para adicionar novos campos de nome e sobrenome do coorientador
 function adicionarCoorientador() {
@@ -76,11 +99,45 @@ function adicionarCoorientador() {
         const divCoorientador = document.getElementById('divCoorientador');
         divCoorientador.appendChild(novoCoorientadorNome);
         divCoorientador.appendChild(novoCoorientadorSobrenome);
-    }
 
-    // Se o contador for igual a 5, esconde o botão
-    if (contadorCoorientador === 5) {
-        document.getElementById('botaoAdicionarCoorientador').style.display = 'none'; // Esconde o botão
+        // Se atingir o limite de 5 coorientadores, esconde o botão de adicionar
+        if (contadorCoorientador === 5) {
+            document.getElementById('ibotaoAdicionarCoorientador').style.display = 'none';
+        }
+        
+        if (contadorCoorientador > 1){
+            document.getElementById('ibotaoRemoverCoorientador').style.display = 'inline';
+        }
     }
 }
+function removerCoorientador() {
+    if (contadorCoorientador > 1) {
+        const divCoorientador = document.getElementById('divCoorientador');
+        
+        // Remove os últimos inputs de nome e sobrenome adicionados
+        divCoorientador.removeChild(divCoorientador.lastChild); // Remove o sobrenome
+        divCoorientador.removeChild(divCoorientador.lastChild); // Remove o nome
 
+        contadorCoorientador--; // Decrementa o contador
+
+        // Esconde o botão "Remover Coorientador" se restar apenas 1 coorientador
+        if (contadorCoorientador === 1) {
+            document.getElementById('ibotaoRemoverCoorientador').style.display = 'none';
+        }
+
+        // Se o número de coorientadores for menor que 5, reexibe o botão de adicionar
+        if (contadorCoorientador < 5) {
+            document.getElementById('ibotaoAdicionarCoorientador').style.display = 'inline';
+        }
+    }
+}
+function validarAno() {
+    const inputAno = document.getElementById('iano');
+    const anoAtual = new Date().getFullYear();
+    const anoInserido = parseInt(inputAno.value, 10);
+
+    if (anoInserido > anoAtual) {
+        inputAno.value = anoAtual;
+        SVGSwitchElement.error(`O ano não pode ser maior que ${anoAtual}. O valor foi ajustado para o ano atual.`);
+    }
+}

@@ -28,7 +28,7 @@
         </header>
         <main>
             <div class="formulario">
-                <form action="ficha.php" method="post" onsubmit="aplicarTitleize()" autocomplete="off">
+                <form action="ficha/ficha.php" method="post" onsubmit="aplicarTitleize()" autocomplete="off">
                     <h1>Dados para Ficha Catalográfica</h1>
                     <div class="tituloTrabalho">
                         <h2>Título</h2><span class="marcaCampoObrigatorio">*</span>
@@ -101,28 +101,27 @@
                     <div class="coorientador">
                         <h2>Coorientador</h2><span class="marcaCampoObrigatorio">*</span>
                         <div id="divCoorientador">
-                            <!-- Inputs iniciais de nome e sobrenome do primeiro coorientador -->
                             <input
-                            id="inomeCoorientador"
-                            type="text"
-                            name="nomeCoorientador1"
-                            pattern="[A-Za-zÀ-ÿ\s]+"
-                            title="Apenas letras e espaços são permitidos."
-                            placeholder="Nome:"
-                            required
+                                id="inomeCoorientador"
+                                type="text"
+                                name="nomeCoorientador1"
+                                pattern="[A-Za-zÀ-ÿ\s]+"
+                                title="Apenas letras e espaços são permitidos."
+                                placeholder="Nome:"
+                                required
                             >
                             <input
-                            id="isobrenomeCoorientador"
-                            type="text"
-                            name="sobrenomeCoorientador1"
-                            pattern="[A-Za-zÀ-ÿ\s]+"
-                            title="Apenas letras e espaços são permitidos."
-                            placeholder="Sobrenome:"
-                            required
+                                id="isobrenomeCoorientador"
+                                type="text"
+                                name="sobrenomeCoorientador1"
+                                pattern="[A-Za-zÀ-ÿ\s]+"
+                                title="Apenas letras e espaços são permitidos."
+                                placeholder="Sobrenome:"
+                                required
                             >
                         </div>
-                        <!-- Certifique-se de que o botão tem o id correto -->
-                        <button id="botaoAdicionarCoorientador" type="button" onclick="adicionarCoorientador()">Adicionar Coorientador</button>
+                        <button id="ibotaoAdicionarCoorientador" type="button" onclick="adicionarCoorientador()">Adicionar Coorientador</button>
+                        <button id="ibotaoRemoverCoorientador" type="button" style="display: none;" onclick="removerCoorientador()">Remover Coorientador</button>
                     </div>
 
 
@@ -130,6 +129,13 @@
                         <h2>Ano</h2><span class="marcaCampoObrigatorio">*</span>
                         <input
                         id="iano"
+                        type="text" 
+                        name="ano"
+                        pattern="\d+" 
+                        title="Apenas números são permitidos."
+                        placeholder="Ex:2024"
+                        required
+                        oninput="validarAno()"
                         >
                     </div>
 
@@ -145,13 +151,20 @@
                             required
                             >
                         </div>
-                        <button type="button" id="botaoAdicionarAssunto" onclick="adicionarAssunto()">Adicionar Assunto</button>
+                        <button type="button" id="ibotaoAdicionarAssunto" onclick="adicionarAssunto()">Adicionar Assunto</button>
+                        <button type="button" id="ibotaoRemoverAssunto" style="display: none;" onclick="removerAssunto()">Remover Assunto</button>
                     </div>
 
                     <div class="modalidades">
-                        <h2>Modalidade</h2>
+                        <h2>Modalidade</h2><span class="marcaCammpoObrigatorio">*</span>
+                        <input
+                        id="graduacao"
+                        type="radio"
+                        name="Graduação"
+                        >
+                        Graduação
                     </div>
-
+                    
                     <input type="submit" value="Enviar">
                 </form>
             </div>
