@@ -1,46 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste Titleize</title>
-    <script>
-        // Função titleize a ser testada
-        function titleize(text) {
-            var loweredText = text.toLowerCase();
-            var words = loweredText.split(" ");
-            for (var a = 0; a < words.length; a++) {
-                var w = words[a];
-                if (w) { // Verifica se a palavra não é uma string vazia
-                    var firstLetter = w[0];
-                    w = firstLetter.toUpperCase() + w.slice(1);
-                    words[a] = w;
-                }
-            }
-            return words.join(" ");
+    <title>Teste de Modalidades</title>
+    <style>
+        /* Apenas para dar um pouco de estilo básico */
+        .modalidades {
+            margin-bottom: 20px;
         }
-
-        // Função para capturar o texto do usuário e exibir o resultado
-        function testarTitleize() {
-            // Pega o valor do input
-            var inputText = document.getElementById('inputTexto').value;
-            
-            // Aplica a função titleize
-            var result = titleize(inputText);
-            
-            // Exibe o resultado no parágrafo abaixo
-            document.getElementById('resultado').innerText = result;
+        select {
+            margin-top: 10px;
+            display: block;
         }
-    </script>
+    </style>
 </head>
 <body>
-    <h1>Teste da Função Titleize</h1>
+    <div class="modalidades">
+        <h2>Modalidade</h2><span class="marcaCampoObrigatorio">*</span>
+        <input
+            id="graduacao"
+            type="radio"
+            name="modalidade"
+            value="Graduacao"
+            onclick="mostrarSelect()"
+        > Graduação
+        <input
+            id="posGraduacao"
+            type="radio"
+            name="modalidade"
+            value="PosGraduacao"
+            onclick="mostrarSelect()"
+        > Pós-Graduação
+        <input
+            id="especializacao"
+            type="radio"
+            name="modalidade"
+            value="Especializacao"
+            onclick="mostrarSelect()"
+        > Especialização
+    </div>
 
-    <label for="inputTexto">Insira um texto:</label>
-    <input type="text" id="inputTexto" placeholder="Digite algo...">
-    <button onclick="testarTitleize()">Testar Titleize</button>
+    <!-- Selects escondidos por padrão -->
+    <div id="selectGraduacao" style="display:none;">
+        <label for="cursoGraduacao">Escolha o curso de graduação:</label>
+        <select id="cursoGraduacao" name="cursoGraduacao">
+            <option value="Engenharia">Engenharia</option>
+            <option value="Ciências">Ciências</option>
+            <option value="Direito">Direito</option>
+        </select>
+    </div>
 
-    <h2>Resultado:</h2>
-    <p id="resultado">O resultado aparecerá aqui...</p>
+    <div id="selectPosGraduacao" style="display:none;">
+        <label for="cursoPosGraduacao">Escolha o curso de pós-graduação:</label>
+        <select id="cursoPosGraduacao" name="cursoPosGraduacao">
+            <option value="Mestrado">Mestrado</option>
+            <option value="Doutorado">Doutorado</option>
+        </select>
+    </div>
+
+    <div id="selectEspecializacao" style="display:none;">
+        <label for="cursoEspecializacao">Escolha o curso de especialização:</label>
+        <select id="cursoEspecializacao" name="cursoEspecializacao">
+            <option value="Gestão de Projetos">Gestão de Projetos</option>
+            <option value="TI">TI</option>
+        </select>
+    </div>
+</div>
+    <script>
+        function mostrarSelect() {
+            // Oculta todos os selects de início
+            document.getElementById("selectGraduacao").style.display = "none";
+            document.getElementById("selectPosGraduacao").style.display = "none";
+            document.getElementById("selectEspecializacao").style.display = "none";
+            
+            // Verifica qual radio está selecionado e exibe o select correspondente
+            const modalidadeSelecionada = document.querySelector('input[name="modalidade"]:checked').value;
+            
+            if (modalidadeSelecionada === "Graduacao") {
+                document.getElementById("selectGraduacao").style.display = "block";
+            } else if (modalidadeSelecionada === "PosGraduacao") {
+                document.getElementById("selectPosGraduacao").style.display = "block";
+            } else if (modalidadeSelecionada === "Especializacao") {
+                document.getElementById("selectEspecializacao").style.display = "block";
+            }
+        }
+    </script>
 </body>
 </html>

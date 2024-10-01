@@ -19,7 +19,6 @@ S: Retorna o documento como string.
 DEFAULT: O valor padrão é I.
 */
 $tipo_pdf = "I";
-
 //Fechando o arquivo
 $pdf->Output($arquivo, $tipo_pdf)
 ?>

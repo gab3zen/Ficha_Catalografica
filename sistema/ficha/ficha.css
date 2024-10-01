@@ -1,7 +1,238 @@
-img{
-    height: 8%;
-    width: 8%;
+body {
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: rgb(35,107,35);
+    background: linear-gradient(0deg, rgba(35,107,35,1) 0%, rgba(39,130,39,1) 20%, 
+    rgba(102,203,102,1) 38%, rgba(175,228,175,1) 56%, rgba(230,246,230,1) 68%, 
+    rgba(255,255,255,1) 78%, rgba(255,255,255,1) 100%);
 }
-.botaoRemoverCoorientador{
-    margin-left: 50px;
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 7px;
 }
+.cabecalho {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background-color: #ffffff;
+}
+.cabecalho .imagem {
+    margin-right: 20px;
+}
+.cabecalho img {
+    width: 100px;
+    height: auto;
+}
+.cabecalho .link {
+    display: flex;
+    flex-direction: column;
+}
+.cabecalho .link a {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
+.cabecalho .link a:hover {
+    text-decoration: underline;
+}
+h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+h2 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+input[type="text"], select {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+input[type="text"]:focus, select:focus {
+    border-color: #009623;
+    outline: none;
+}
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #777;
+}
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+.titulo_numeroFolhas {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.titulo {
+    flex: 85%;
+}
+
+.numeroFolhas {
+    flex: 15%;
+}
+
+.titulo input, .numeroFolhas input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.nome_sobrenome {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.nome_sobrenome input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.nome_sobrenome .nome {
+    flex: 50%; 
+}
+
+.nome_sobrenome .sobrenome {
+    flex: 50%; 
+}
+.ano_assunto {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; 
+}
+
+.ano_assunto .assunto {
+    flex: 90%;
+}
+
+.ano_assunto .ano {
+    flex: 10%;
+}
+
+#ibotaoAdicionarAssunto, #ibotaoAdicionarCoorientador{
+    border: none;
+    border-radius: 100%;
+    background-color: rgb(0, 207, 59);
+    color: #ffffff;
+    height: 23px;
+    width: 23px;
+    marging-left: 3px;
+}
+
+#ibotaoRemoverAssunto, #ibotaoRemoverCoorientador{
+    border: none;
+    border-radius: 100%;
+    background-color: rgb(207, 0, 0);
+    color: #ffffff;
+    height: 23px;
+    width: 23px;
+    marging-left: 3px;
+}
+
+.ano_assunto input {
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.modalidades {
+    margin-bottom: 20px; 
+}
+
+.opcaoModalidade {
+    display: flex;
+    justify-content: center;
+    gap: 25%;
+}
+
+.opcaoModalidade label {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.opcaoModalidade input[type="radio"]:checked + span {
+    border-color: #035516;
+}
+
+
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.botoes input[type="submit"], .botoes input[type="reset"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+}
+
+.botoes input[type="submit"]{
+    background-color: #035516;
+}
+
+.botoes input[type="reset"] {
+    background-color: #dc3545; 
+}
+
+.botoes input[type="submit"]:hover,
+.botoes input[type="reset"]:hover {
+    opacity: 0.8;
+}
+
+.orientador_orientadora, .coorientador_coorientadora {
+    display: flex; /* Usar flexbox para alinhar elementos em linha */
+    align-items: center; /* Alinhar os elementos verticalmente ao centro */
+    gap: 10px; /* Espaço entre o título e a checkbox/label */
+}
+
+.checkbox-label {
+    display: flex; /* Alinhar o input e a label horizontalmente */
+    align-items: center; /* Alinhar verticalmente a checkbox e o texto */
+}
+
+.checkbox-label label {
+    margin-left: 5px; /* Espaço entre a checkbox e o texto */
+    font-size: 9;
+}
+

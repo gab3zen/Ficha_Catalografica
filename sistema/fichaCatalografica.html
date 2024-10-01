@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ficha/ficha.css"/>
+    <script src="ficha/ficha.js"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <title>Ficha Catalográfica</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="cabecalho">
+                <div class="imagem">
+                    <a href="https://ifrs.edu.br/" target="_blank">
+                        <img alt="Logo-IFRS" src="ficha/Logo-IFRS-cores-sem-fundo-Vertical.png" />
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="https://ifrs.edu.br/" target="_blank">Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Sul</a>
+                    <a href="" target="_blank">Sistema de Bibliotecas do IFRS - SIBIFRS</a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="formulario">
+                <h1>Dados para Ficha Catalográfica</h1>
+                <form action="ficha/ficha.php" method="post">
+                    <div class="titulo_numeroFolhas">
+                        <div class="titulo">
+                            <h2>Título</h2>
+                            <input 
+                            id="itituloTrabalho" 
+                            type="text" 
+                            name="tituloTrabalho"
+                            placeholder="Título do Trabalho"
+                            required
+                            >
+                        </div>
+                        <div class="numeroFolhas">
+                            <h2>Número de Folhas</h2>
+                            <input 
+                            id="inumeroFolhas" 
+                            type="text" 
+                            name="numeroFolhas"
+                            pattern="\d+" 
+                            title="Apenas números são permitidos."
+                            placeholder="Número de Folhas"
+                            required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="autor">
+                        <h2>Autor</h2>
+                        <div class="nome_sobrenome">
+                            <div class="nome">
+                                <input 
+                                id="inomeAutor" 
+                                type="text" 
+                                name="nomeAutor"
+                                pattern="[A-Za-zÀ-ÿ\s]+" 
+                                title="Apenas letras e espaços são permitidos." 
+                                placeholder="Nome:"
+                                required
+                                oninput="aplicarTitleize('inomeAutor')"
+                                >
+                            </div>
+                            <div class="sobrenome">
+                                <input 
+                                id="isobrenomeAutor" 
+                                type="text" 
+                                name="sobrenomeAutor"
+                                pattern="[A-Za-zÀ-ÿ\s]+" 
+                                title="Apenas letras e espaços são permitidos."
+                                placeholder="Sobrenome:"
+                                required
+                                oninput="aplicarTitleize('isobrenomeAutor')"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orientador">
+                        <div class="orientador_orientadora">
+                            <h2>Orientador</h2>
+                            <div class="checkbox-label">
+                                <input
+                                    id="iorientadora"
+                                    type="checkbox"
+                                    name="orientadora"
+                                >
+                                <label for="icoOrientadora">Orientadora</label>
+                            </div>
+                        </div>
+                        <div class="nome_sobrenome">
+                            <div class="nome">
+                                <input 
+                                    id="inomeOrientador" 
+                                    type="text" 
+                                    name="nomeOrientador"
+                                    pattern="[A-Za-zÀ-ÿ\s]+" 
+                                    title="Apenas letras e espaços são permitidos." 
+                                    placeholder="Nome:"
+                                    required
+                                    oninput="aplicarTitleize('inomeOrientador')"
+                                >
+                            </div>
+                            <div class="sobrenome">
+                                <input 
+                                    id="isobrenomeOrientador" 
+                                    type="text" 
+                                    name="sobrenomeOrientador"
+                                    pattern="[A-Za-zÀ-ÿ\s]+" 
+                                    title="Apenas letras e espaços são permitidos."
+                                    placeholder="Sobrenome:"
+                                    required
+                                    oninput="aplicarTitleize('isobrenomeOrientador')"
+                                >
+                            </div>
+                        </div>                            
+                    </div>  
+                    
+                    <div class="coorientador">
+                        <div class="coorientador_coorientadora">
+                            <h2>Coorientador</h2>
+                            <div class="checkbox-label">
+                                <input
+                                    id="icoCoorientadora"
+                                    type="checkbox"
+                                    name="coorientadora"
+                                >
+                                <label for="icoCoorientadora">Coorientadora</label>
+                            </div>
+                            <button type="button" id="ibotaoAdicionarCoorientador" onclick="adicionarCoorientador()"><i class="ph ph-plus"></i></button>
+                            <button type="button" id="ibotaoRemoverCoorientador" style="display: none;" onclick="removerCoorientador()"><i class="ph ph-minus"></i></button>
+                        </div>
+                        <div id="divCoorientador">
+                            <div class="nome_sobrenome">
+                                <div class="nome">
+                                    <input
+                                        id="inomeCoorientador"
+                                        type="text"
+                                        name="nomeCoorientador1"
+                                        pattern="[A-Za-zÀ-ÿ\s]+"
+                                        title="Apenas letras e espaços são permitidos."
+                                        placeholder="Nome:"
+                                        required
+                                        oninput="aplicarTitleize('inomeCoorientador')"
+                                    >
+                                </div>
+                                <div class="sobrenome">
+                                    <input
+                                        id="isobrenomeCoorientador"
+                                        type="text"
+                                        name="sobrenomeCoorientador1"
+                                        pattern="[A-Za-zÀ-ÿ\s]+"
+                                        title="Apenas letras e espaços são permitidos."
+                                        placeholder="Sobrenome:"
+                                        required
+                                        oninput="aplicarTitleize('isobrenomeCoorientador')"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+                    <div class="ano_assunto">
+                        <div class="ano">
+                            <h2>Ano</h2>
+                            <input
+                                id="iano"
+                                type="text" 
+                                name="ano"
+                                pattern="\d+" 
+                                title="Apenas números são permitidos."
+                                placeholder="Ex:2024"
+                                required
+                                oninput="validarAno()"
+                            >
+                        </div>
+
+                        <div class="assunto">
+                            <h2 style="display: inline-block; margin-right: 10px;">Assunto(s)</h2>
+                            <button type="button" id="ibotaoAdicionarAssunto" onclick="adicionarAssunto()">
+                                <i class="ph ph-plus"></i>
+                            </button>
+                            <button type="button" id="ibotaoRemoverAssunto" style="display: none;" onclick="removerAssunto()">
+                                <i class="ph ph-minus"></i>
+                            </button>
+                            <div id="divAssuntos">
+                                <input
+                                    id="iassuntos"
+                                    type="text"
+                                    name="assunto1"
+                                    placeholder="Assunto 1"
+                                    required
+                                >
+                            </div>
+                        </div>
+                    </div>
+                        
+
+                    <div class="modalidades">
+                        <h2>Modalidades</h2>
+                        <div class="opcaoModalidade">
+                            <label for="graduacao">
+                                <input
+                                    id="graduacao"
+                                    type="radio"
+                                    name="modalidade"
+                                    value="Graduacao"
+                                    onclick="mostrarSelect()"
+                                > Graduação
+                            </label>
+                            <label for="posGraduacao">
+                                <input
+                                    id="posGraduacao"
+                                    type="radio"
+                                    name="modalidade"
+                                    value="PosGraduacao"
+                                    onclick="mostrarSelect()"
+                                > Pós-Graduação
+                            </label>
+                            <label for="especializacao">
+                                <input
+                                    id="especializacao"
+                                    type="radio"
+                                    name="modalidade"
+                                    value="Especializacao"
+                                    onclick="mostrarSelect()"
+                                > Especialização
+                            </label>
+                        </div>
+                    </div>
+                    
+
+                    <div id="selectGraduacao" style="display:none;">
+                        <label for="cursoGraduacao">Escolha o curso de graduação:</label>
+                        <select id="cursoGraduacao" name="cursoGraduacao" required>
+                            <option value="">(Selecione)</option>
+                            <optgroup label="Campus Sertão">
+                                <option value="Engenharia">Engenharia sertao</option>
+                            </optgroup>
+                            <option value="Ciências">Ciências</option>
+                            <option value="Direito">Direito</option>
+                        </select>
+                    </div>
+
+                    <div id="selectPosGraduacao" style="display:none;">
+                        <label for="cursoPosGraduacao">Escolha o curso de pós-graduação:</label>
+                        <select id="cursoPosGraduacao" name="cursoPosGraduacao" required>
+                            <option value="">(Selecione)</option>
+                            <optgroup label="Campus Feliz">
+                                <option value="Mestrado">Mestrado feliz</option>
+                                <option value="Doutorado">Doutorado feliz</option>
+                            </optgroup>
+                            <optgroup label="Campus Bento">
+                                <option value="Mestrado">Mestrado bento</option>
+                                <option value="Doutorado">Doutorado bento</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div id="selectEspecializacao" style="display:none;">
+                        <label for="cursoEspecializacao">Escolha o curso de especialização:</label>
+                        <select id="cursoEspecializacao" name="cursoEspecializacao" required>
+                            <option value="">(Selecione)</option>
+                            <option value="Gestão de Projetos">Gestão de Projetos</option>
+                            <option value="TI">TI</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <input id="ienviar" type="submit" value="Enviar">
+                    <input id="ilimpar" type="reset" value="Limpar">
+                </div> 
+                </form>
+            </div>
+        </main>
+        <footer>
+        </footer>
+    </div>
+</body>
+</html>
+
