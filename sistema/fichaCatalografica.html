@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="ficha/ficha.css"/>
-    <script src="ficha/ficha.js"></script>
+    <script src="ficha/ficha2.js"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <title>Ficha Catalográfica</title>
 </head>
@@ -26,62 +26,36 @@
         <main>
             <div class="formulario">
                 <h1>Dados para Ficha Catalográfica</h1>
-                <form action="ficha/ficha.php" method="post">
-                    <div class="titulo_numeroFolhas">
-                        <div class="titulo">
-                            <h2>Título</h2>
-                            <input 
-                            id="itituloTrabalho" 
-                            type="text" 
-                            name="tituloTrabalho"
-                            placeholder="Título do Trabalho"
-                            required
-                            >
-                        </div>
-                        <div class="numeroFolhas">
-                            <h2>Número de Folhas</h2>
-                            <input 
-                            id="inumeroFolhas" 
-                            type="text" 
-                            name="numeroFolhas"
-                            pattern="\d+" 
-                            title="Apenas números são permitidos."
-                            placeholder="Número de Folhas"
-                            required
-                            >
-                        </div>
-                    </div>
-
+                <form action="ficha.php" method="post">                    
                     <div class="autor">
                         <h2>Autor</h2>
                         <div class="nome_sobrenome">
                             <div class="nome">
                                 <input 
-                                id="inomeAutor" 
-                                type="text" 
-                                name="nomeAutor"
-                                pattern="[A-Za-zÀ-ÿ\s]+" 
-                                title="Apenas letras e espaços são permitidos." 
-                                placeholder="Nome:"
-                                required
-                                oninput="aplicarTitleize('inomeAutor')"
+                                    id="inomeAutor" 
+                                    type="text" 
+                                    name="nomeAutor"
+                                    pattern="[A-Za-zÀ-ÿ\s']+" 
+                                    title="Apenas letras e espaços são permitidos." 
+                                    placeholder="Nome completo sem o último sobrenome:"
+                                    required
+                                    oninput="aplicarTitleize('inomeAutor')"
                                 >
                             </div>
                             <div class="sobrenome">
                                 <input 
-                                id="isobrenomeAutor" 
-                                type="text" 
-                                name="sobrenomeAutor"
-                                pattern="[A-Za-zÀ-ÿ\s]+" 
-                                title="Apenas letras e espaços são permitidos."
-                                placeholder="Sobrenome:"
-                                required
-                                oninput="aplicarTitleize('isobrenomeAutor')"
+                                    id="isobrenomeAutor" 
+                                    type="text" 
+                                    name="sobrenomeAutor"
+                                    pattern="[A-Za-zÀ-ÿ\s']+" 
+                                    title="Apenas letras e espaços são permitidos."
+                                    placeholder="Último sobrenome:"
+                                    required
+                                    oninput="aplicarTitleize('isobrenomeAutor')"
                                 >
                             </div>
                         </div>
                     </div>
-
                     <div class="orientador">
                         <div class="orientador_orientadora">
                             <h2>Orientador</h2>
@@ -91,7 +65,7 @@
                                     type="checkbox"
                                     name="orientadora"
                                 >
-                                <label for="icoOrientadora">Orientadora</label>
+                                <label for="iOrientadora">Orientadora</label>
                             </div>
                         </div>
                         <div class="nome_sobrenome">
@@ -102,7 +76,7 @@
                                     name="nomeOrientador"
                                     pattern="[A-Za-zÀ-ÿ\s]+" 
                                     title="Apenas letras e espaços são permitidos." 
-                                    placeholder="Nome:"
+                                    placeholder="Nome completo sem o último sobrenome:"
                                     required
                                     oninput="aplicarTitleize('inomeOrientador')"
                                 >
@@ -114,14 +88,13 @@
                                     name="sobrenomeOrientador"
                                     pattern="[A-Za-zÀ-ÿ\s]+" 
                                     title="Apenas letras e espaços são permitidos."
-                                    placeholder="Sobrenome:"
+                                    placeholder="Último sobrenome:"
                                     required
                                     oninput="aplicarTitleize('isobrenomeOrientador')"
                                 >
                             </div>
                         </div>                            
-                    </div>  
-                    
+                    </div>
                     <div class="coorientador">
                         <div class="coorientador_coorientadora">
                             <h2>Coorientador</h2>
@@ -133,8 +106,12 @@
                                 >
                                 <label for="icoCoorientadora">Coorientadora</label>
                             </div>
-                            <button type="button" id="ibotaoAdicionarCoorientador" onclick="adicionarCoorientador()"><i class="ph ph-plus"></i></button>
-                            <button type="button" id="ibotaoRemoverCoorientador" style="display: none;" onclick="removerCoorientador()"><i class="ph ph-minus"></i></button>
+                            <button type="button" id="ibotaoAdicionarCoorientador" onclick="adicionarCoorientador()">
+                                <i class="ph ph-plus"></i>
+                            </button>
+                            <button type="button" id="ibotaoRemoverCoorientador" style="display: none;" onclick="removerCoorientador()">
+                                <i class="ph ph-minus"></i>
+                            </button>
                         </div>
                         <div id="divCoorientador">
                             <div class="nome_sobrenome">
@@ -145,7 +122,7 @@
                                         name="nomeCoorientador1"
                                         pattern="[A-Za-zÀ-ÿ\s]+"
                                         title="Apenas letras e espaços são permitidos."
-                                        placeholder="Nome:"
+                                        placeholder="Nome completo sem o último sobrenome:"
                                         required
                                         oninput="aplicarTitleize('inomeCoorientador')"
                                     >
@@ -157,7 +134,7 @@
                                         name="sobrenomeCoorientador1"
                                         pattern="[A-Za-zÀ-ÿ\s]+"
                                         title="Apenas letras e espaços são permitidos."
-                                        placeholder="Sobrenome:"
+                                        placeholder="Último sobrenome:"
                                         required
                                         oninput="aplicarTitleize('isobrenomeCoorientador')"
                                     >
@@ -165,9 +142,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="titulo">
+                        <h2>Título</h2>
+                        <input 
+                        id="itituloTrabalho" 
+                        type="text" 
+                        name="tituloTrabalho"
+                        placeholder="Título do Trabalho"
+                        required
+                        >
+                    </div>
                     
-                    
-
                     <div class="ano_assunto">
                         <div class="ano">
                             <h2>Ano</h2>
@@ -182,7 +167,18 @@
                                 oninput="validarAno()"
                             >
                         </div>
-
+                        <div class="numeroFolhas">
+                            <h2>N° de Páginas</h2>
+                            <input 
+                            id="inumeroFolhas" 
+                            type="text" 
+                            name="numeroFolhas"
+                            pattern="\d+" 
+                            title="Apenas números são permitidos."
+                            placeholder="Ex:123"
+                            required
+                            >
+                        </div>
                         <div class="assunto">
                             <h2 style="display: inline-block; margin-right: 10px;">Assunto(s)</h2>
                             <button type="button" id="ibotaoAdicionarAssunto" onclick="adicionarAssunto()">
@@ -203,77 +199,236 @@
                         </div>
                     </div>
                         
-
                     <div class="modalidades">
-                        <h2>Modalidades</h2>
+                        <h2>Tipo do Trabalho</h2>
                         <div class="opcaoModalidade">
-                            <label for="graduacao">
-                                <input
-                                    id="graduacao"
-                                    type="radio"
-                                    name="modalidade"
-                                    value="Graduacao"
-                                    onclick="mostrarSelect()"
-                                > Graduação
+                            <label>
+                                <input type="radio" name="modalidade" value="Graduacao" onclick="mostrarSelect()"> Graduação
                             </label>
-                            <label for="posGraduacao">
-                                <input
-                                    id="posGraduacao"
-                                    type="radio"
-                                    name="modalidade"
-                                    value="PosGraduacao"
-                                    onclick="mostrarSelect()"
-                                > Pós-Graduação
+                            <label>
+                                <input type="radio" name="modalidade" value="PosGraduacao" onclick="mostrarSelect()"> Pós-Graduação
                             </label>
-                            <label for="especializacao">
-                                <input
-                                    id="especializacao"
-                                    type="radio"
-                                    name="modalidade"
-                                    value="Especializacao"
-                                    onclick="mostrarSelect()"
-                                > Especialização
-                            </label>
+                            <label>
+                                <input type="radio" name="modalidade" value="Especializacao" onclick="mostrarSelect()"> Especialização                                </label>
                         </div>
                     </div>
                     
-
                     <div id="selectGraduacao" style="display:none;">
                         <label for="cursoGraduacao">Escolha o curso de graduação:</label>
-                        <select id="cursoGraduacao" name="cursoGraduacao" required>
+                        <select id="cursoGraduacao" name="cursoGraduacao" onchange="validarSelecoes();">
                             <option value="">(Selecione)</option>
-                            <optgroup label="Campus Sertão">
-                                <option value="Engenharia">Engenharia sertao</option>
+                            <optgroup label="Campus Alvorada"></optgroup>
+                            <option value="Licenciatura em Pedagogia">Licenciatura em Pedagogia</option>
+                            <option value="Tecnologia em Produção Multimídia">Tecnologia em Produção Multimídia</option>
+                            <optgroup label="Campus Bento Gonçalves">
+                                <option value="Bacharelado em Agronomia">Bacharelado em Agronomia</option>
+                                <option value="Licenciatura em Física">Licenciatura em Física</option>
+                                <option value="Licenciatura em Letras - Língua Portuguesa">Licenciatura em Letras - Língua Portuguesa</option>
+                                <option value="Licenciatura em Matemática">Licenciatura em Matemática</option>
+                                <option value="Licenciatura em Pedagogia">Licenciatura em Pedagogia</option>
+                                <option value="Tecnologia em Alimentos">Tecnologia em Alimentos</option>
+                                <option value="Tecnologia em Análise e Desenvolvimento de Sistemas">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                                <option value="Tecnologia em Horticultura">Tecnologia em Horticultura</option>
+                                <option value="Tecnologia em Logística">Tecnologia em Logística</option>
+                                <option value="Tecnologia em Viticultura e Enologia">Tecnologia em Viticultura e Enologia</option>
                             </optgroup>
-                            <option value="Ciências">Ciências</option>
-                            <option value="Direito">Direito</option>
+                            <optgroup label="Campus Canoas">
+                                <option value="Bacharelado em Engenharia Eletrônica">Bacharelado em Engenharia Eletrônica</option>
+                                <option value="Licenciatura em Matemática">Licenciatura em Matemática</option>
+                                <option value="Tecnologia em Análise e Desenvolvimento de Sistemas">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                                <option value="Tecnologia em Logística">Tecnologia em Logística</option>
+                            </optgroup>
+                            <optgroup label="Campus Caxias do Sul">
+                                <option value="Bacharelado em Engenharia de Produção">Bacharelado em Engenharia de Produção</option>
+                                <option value="Bacharelado em Engenharia Metalúrgica">Bacharelado em Engenharia Metalúrgica</option>
+                                <option value="Licenciatura em Matemática">Licenciatura em Matemática</option>
+                                <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                                <option value="Tecnologia em Processos Metalúrgicos">Tecnologia em Processos Metalúrgicos</option>
+                            </optgroup>
+                            <optgroup label="Campus Erechim">
+                                <option value="Bacharelado em Administração">Bacharelado em Administração</option>
+                                <option value="Bacharelado em Engenharia de Alimentos">Bacharelado em Engenharia de Alimentos</option>
+                                <option value="Bacharelado em Engenharia Mecânica">Bacharelado em Engenharia Mecânica</option>
+                                <option value="Tecnologia em Análise e Desenvolvimento de Sistemas">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                                <option value="Tecnologia em Design de Moda">Tecnologia em Design de Moda</option>
+                                <option value="Tecnologia em Marketing">Tecnologia em Marketing</option>
+                            </optgroup>
+                            <optgroup label="Campus Farroupilha">
+                                <option value="Bacharelado em Engenharia de Controle e Automação">Bacharelado em Engenharia de Controle e Automação</option>
+                                <option value="Bacharelado em Engenharia Mecânica">Bacharelado em Engenharia Mecânica</option>
+                                <option value="Licenciatura em Pedagogia">Licenciatura em Pedagogia</option>
+                                <option value="Tecnologia em Análise e Desenvolvimento de Sistemas">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                                <option value="Tecnologia em Fabricação Mecânica">Tecnologia em Fabricação Mecânica</option>
+                                <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                            </optgroup>
+                            <optgroup label="Campus Feliz">
+                                <option value="Tecnologia em Análise e Desenvolvimento de Sistemas">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                                <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                                <option value="Licenciatura em Letras - Português e Inglês">Licenciatura em Letras - Português e Inglês</option>
+                                <option value="Licenciatura em Química">Licenciatura em Química</option>
+                                <option value="Bacharelado em Engenharia Química">Bacharelado em Engenharia Química</option>
+                            </optgroup>
+                            <optgroup label="Campus Ibirubá"></optgroup>
+                                <option label="Bacharel em Agronomia">Bacharel em Agronomia</option>
+                                <option label="Bacharel em Ciência da Computação">Bacharel em Ciência da Computação</option>
+                                <option label="Bacharel em Engenharia Mecânica">Bacharel em Engenharia Mecânica</option>
+                                <option label="Licenciatura em Matemática">Licenciatura em Matemática</option>
+                            <optgroup label="Campus Osório">
+                                <option label="Licenciatura em Letras - Português e Inglês">Licenciatura em Letras - Português e Inglês</option>
+                                <option label="Licenciatura em Matemática">Licenciatura em Matemática</option>
+                                <option label="Tecnologia em Análise e Desenvolvimento de Sistemas>">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                                <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                            </optgroup>
+                            <optgroup label="Campus Porto Alegre">
+                                <option value="Licenciatura em Ciências da Natureza: Biologia e Química">Licenciatura em Ciências da Natureza: Biologia e Química</option>
+                                <option value="Tecnologia em Gestão Ambiental">Tecnologia em Gestão Ambiental</option>
+                                <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                                <option value="Tecnologia em Sistemas para Internet">Tecnologia em Sistemas para Internet</option>
+                            </optgroup>
+                            <optgroup label="Campus Restinga (Porto Alegre)">
+                                <option value="Licenciatura em Letras - Português e Espanhol">Licenciatura em Letras - Português e Espanhol</option>
+                                <option value="Tecnologia em Agroecologia">Tecnologia em Agroecologia</option>
+                                <option value="Tecnologia em Análise e Desenvolvimento de Sistemas">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                                <option value="Tecnologia em Eletrônica Industrial">Tecnologia em Eletrônica Industrial</option>
+                                <option value="Tecnologia em Gestão Desportiva e de Lazer">Tecnologia em Gestão Desportiva e de Lazer</option>
+                                <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                            </optgroup>
+                            <optgroup label="Campus Rio Grande">
+                                <option value="Bacharelado em Arquitetura e Urbanismo">Bacharelado em Arquitetura e Urbanismo</option>
+                                <option value="Bacharelado em Engenharia Mecânica">Bacharelado em Engenharia Mecânica</option>
+                                <option value="Tecnologia em Análise e Desenvolvimento de Sistemas">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                                <option value="Tecnologia em Construção de Edifícios">Tecnologia em Construção de Edifícios</option>
+                                <option value="Formação Pedagógica para Graduados Não Licenciados">Formação Pedagógica para Graduados Não Licenciados</option>
+                            </optgroup>
+                            <optgroup label="Campus Rolante">
+                                <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                                <option value="Tecnologia em Análise e Desenvolvimento de Sistemas">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                            </optgroup>
+                            <optgroup label="Campus Sertão">
+                                <option value="Bacharelado em Agronomia">Bacharelado em Agronomia</option>
+                                <option value="Bacharelado em Zootecnia">Bacharelado em Zootecnia</option>
+                                <option value="Licenciatura em Ciências Biológicas">Licenciatura em Ciências Biológicas</option>
+                                <option value="Tecnologia em Agronegócio">Tecnologia em Agronegócio</option>
+                                <option value="Tecnologia em Análise e Desenvolvimento de Sistemas">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                                <option value="Tecnologia em Gestão Ambiental">Tecnologia em Gestão Ambiental</option>
+                                <option value="Formação Pedagógica para Graduados Não Licenciados">Formação Pedagógica para Graduados Não Licenciados</option>
+                            </optgroup>
+                                <optgroup label="Campus Vacaria">
+                                    <option value="Bacharelado em Agronomia">Bacharelado em Agronomia</option>
+                                    <option value="Bacharelado em Sistemas de Informação">Bacharelado em Sistemas de Informação</option>
+                                    <option value="Licenciatura em Ciências Biológicas">Licenciatura em Ciências Biológicas</option>
+                                    <option value="Licenciatura em Pedagogia">Licenciatura em Pedagogia</option>
+                                    <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                                </optgroup>
+                            <optgroup label="Campus Veranópolis">
+                                <option value="Tecnologia em Análise e Desenvolvimento de Sistemas">Tecnologia em Análise e Desenvolvimento de Sistemas</option>
+                                <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                            </optgroup>
+                            <optgroup label="Campus Viamão">
+                                <option value="Tecnologia em Gestão Ambiental">Especialização em Agroecologia</option>
+                                <option value="Tecnologia em Processos Gerenciais">Tecnologia em Processos Gerenciais</option>
+                            </optgroup>
                         </select>
                     </div>
-
+                    
                     <div id="selectPosGraduacao" style="display:none;">
                         <label for="cursoPosGraduacao">Escolha o curso de pós-graduação:</label>
-                        <select id="cursoPosGraduacao" name="cursoPosGraduacao" required>
+                        <select id="cursoPosGraduacao" name="cursoPosGraduacao" onchange="validarSelecoes();">
                             <option value="">(Selecione)</option>
+                            <optgroup label="Campus Alvorada"></optgroup>
+                            <optgroup label="Campus Bento Gonçalves">
+                                <option value="Mestrado Profissional em Viticultura e Enologia">Mestrado Profissional em Viticultura e Enologia</option>
+                            </optgroup>
+                            <optgroup label="Campus Canoas">
+                                <option value="Mestrado Profissional em Matemática em Rede Nacional  (PROFMAT)">Mestrado Profissional em Matemática em Rede Nacional  (PROFMAT)</option>
+                            </optgroup>
+                            <optgroup label="Campus Caxias do Sul">
+                                <option value="Mestrado Profissional em Tecnologia e Engenharia de Materiais">Mestrado Profissional em Tecnologia e Engenharia de Materiais</option>                                </option>
+                            </optgroup>
+                            <optgroup label="Campus Erechim"></optgroup>
+                            <optgroup label="Campus Farroupilha">
+                                <option value="Mestrado em Educação Básica">Mestrado em Educação Básica</option>
+                                <option value="Mestrado Profissional em Tecnologia e Engenharia dos Materiais">Mestrado Profissional em Tecnologia e Engenharia dos Materiais</option>
+                            </optgroup>
                             <optgroup label="Campus Feliz">
-                                <option value="Mestrado">Mestrado feliz</option>
-                                <option value="Doutorado">Doutorado feliz</option>
+                                <option value="Mestrado Profissional em Tecnologia e Engenharia dos Materiais">Mestrado Profissional em Tecnologia e Engenharia dos Materiais</option>
                             </optgroup>
-                            <optgroup label="Campus Bento">
-                                <option value="Mestrado">Mestrado bento</option>
-                                <option value="Doutorado">Doutorado bento</option>
+                            <optgroup label="Campus Ibirubá"></optgroup>
+                            <optgroup label="Campus Osório"></optgroup>
+                            <optgroup label="Campus Porto Alegre">
+                                <option value="Mestrado Profissional em Informática na Educação">Mestrado Profissional em Informática na Educação</option>
+                                <option value="Mestrado Profissional em Educação Profissional e Tecnológica">Mestrado Profissional em Educação Profissional e Tecnológica</option>
+                                <option value="Mestrado Profissional em Propriedade Intelectual e Transferência de Tecnologia para a Inovação">Mestrado Profissional em Propriedade Intelectual e Transferência de Tecnologia para a Inovação</option>
                             </optgroup>
+                            <optgroup label="Campus Restinga (Porto Alegre)"></optgroup>
+                            <optgroup label="Campus Rio Grande"></optgroup>
+                            <optgroup label="Campus Rolante"></optgroup>
+                            <optgroup label="Campus Sertão"></optgroup>
+                            <optgroup label="Campus Vacaria"></optgroup>
+                            <optgroup label="Campus Veranópolis"></optgroup>
+                            <optgroup label="Campus Viamão"></optgroup>
                         </select>
                     </div>
-
+                    
                     <div id="selectEspecializacao" style="display:none;">
                         <label for="cursoEspecializacao">Escolha o curso de especialização:</label>
-                        <select id="cursoEspecializacao" name="cursoEspecializacao" required>
+                        <select id="cursoEspecializacao" name="cursoEspecializacao" onchange="validarSelecoes();">
                             <option value="">(Selecione)</option>
-                            <option value="Gestão de Projetos">Gestão de Projetos</option>
-                            <option value="TI">TI</option>
+                            <optgroup label="Campus Alvorada"></optgroup>
+                            <option value="Especialização em Saúde Coletiva">Especialização em Saúde Coletiva</option>
+                            <optgroup label="Campus Bento Gonçalves">
+                                <option value="Especialização em Ensino de Matemática para a Educação Básica">Especialização em Ensino de Matemática para a Educação Básica</option>
+                                <option value="Especialização em Viticultura">Especialização em Viticultura</option>
+                            </optgroup>
+                            <optgroup label="Campus Canoas">
+                                <option value="Especialização em Gestão de Projetos e Inovação">Especialização em Gestão de Projetos e Inovação</option>
+                                <option value="Especialização em Linguagens Contemporâneas e Ensino">Especialização em Linguagens Contemporâneas e Ensino</option>
+                            </optgroup>
+                            <optgroup label="Campus Caxias do Sul">
+                                <option value="Especialização na Docência em Educação Básica e Profissional">Especialização na Docência em Educação Básica e Profissional</option>                                </option>
+                            </optgroup>
+                            <optgroup label="Campus Erechim">
+                                <option value="Especialização em Gestão Estratégica e Inteligência de Negócios">Especialização em Gestão Estratégica e Inteligência de Negócios</option>
+                                <option value="Especialização em Modelagem Criativa com Ênfase em Sustentabilidade">Especialização em Modelagem Criativa com Ênfase em Sustentabilidade</option>
+                            </optgroup>
+                            <optgroup label="Campus Farroupilha">
+                                <option value="Especialização em Educação: Reflexões e Práticas para a Educação Básica">Especialização em Educação: Reflexões e Práticas para a Educação Básica</option>
+                                <option value="Especialização em Inovação e Gestão">Especialização em Inovação e Gestão</option>
+                            </optgroup>
+                            <optgroup label="Campus Feliz">
+                                <option value="Especialização - MBA em Gestão Empresarial">Especialização - MBA em Gestão Empresarial</option>
+                                <option value="Especialização em Gestão Escolar">Especialização em Gestão Escolar</option>
+                            </optgroup>
+                            <optgroup label="Campus Ibirubá">
+                                <option label="Especialização em Ensino, Linguagens e Suas Tecnologias">Especialização em Ensino, Linguagens e Suas Tecnologias</option>
+                            </optgroup>
+                            <optgroup label="Campus Osório">
+                                <option label="Especialização em Educação Básica e Profissional">Especialização em Educação Básica e Profissional</option>
+                            </optgroup>
+                            <optgroup label="Campus Porto Alegre">
+                                <option value="Especialização em Gestão Empresarial">Especialização em Gestão Empresarial</option>
+                            </optgroup>
+                            <optgroup label="Campus Restinga (Porto Alegre)">
+                                <option value="Especialização em Manufatura Avançada (Indústria 4.0)">Especialização em Manufatura Avançada (Indústria 4.0)</option>
+                                <option value="Especialização em Práticas Assertivas da Educação Profissional Integrada à Educação de Jovens e Adultos">Especialização em Práticas Assertivas da Educação Profissional Integrada à Educação de Jovens e Adultos</option>
+                            </optgroup>
+                            <optgroup label="Campus Rio Grande"></optgroup>
+                            <optgroup label="Campus Rolante"></optgroup>
+                            <optgroup label="Campus Sertão">
+                                <option value="Especialização em Desenvolvimento e Inovação">Especialização em Desenvolvimento e Inovação</option>
+                                <option value="Especialização em Docência da Educação Profissional e Tecnológica">Especialização em Docência da Educação Profissional e Tecnológica</option>
+                                <option value="Especialização em Sistemas de Produção Vegetal">Especialização em Sistemas de Produção Vegetal</option>
+                                <option value="Especialização em Teorias e Metodologias da Educação">Especialização em Teorias e Metodologias da Educação</option>
+                            </optgroup>
+                            <optgroup label="Campus Vacaria">
+                                <option value="Especialização em Docência na Educação Básica">Especialização em Docência na Educação Básica</option>
+                            </optgroup>    
+                            <optgroup label="Campus Veranópolis"></optgroup>
+                            <optgroup label="Campus Viamão">
+                                <option value="Especialização em Agroecologia">Especialização em Agroecologia</option>
+                            </optgroup>
                         </select>
-                    </div>
-                </div>
+                    </div>                 
                 <div class="botoes">
                     <input id="ienviar" type="submit" value="Enviar">
                     <input id="ilimpar" type="reset" value="Limpar">
@@ -281,9 +436,6 @@
                 </form>
             </div>
         </main>
-        <footer>
-        </footer>
     </div>
 </body>
 </html>
-

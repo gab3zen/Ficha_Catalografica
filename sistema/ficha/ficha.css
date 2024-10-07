@@ -3,17 +3,16 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: rgb(35,107,35);
-    background: linear-gradient(0deg, rgba(35,107,35,1) 0%, rgba(39,130,39,1) 20%, 
-    rgba(102,203,102,1) 38%, rgba(175,228,175,1) 56%, rgba(230,246,230,1) 68%, 
-    rgba(255,255,255,1) 78%, rgba(255,255,255,1) 100%);
+    background-color: #a3b18a;
 }
 .container {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 7px;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 .cabecalho {
     display: flex;
@@ -80,12 +79,6 @@ input {
     box-sizing: border-box;
 }
 
-
-
-
-
-
-
 .titulo_numeroFolhas {
     display: flex;
     justify-content: space-between;
@@ -93,11 +86,11 @@ input {
 }
 
 .titulo {
-    flex: 85%;
+    flex: 80%;
 }
 
 .numeroFolhas {
-    flex: 15%;
+    flex: 20%;
 }
 
 .titulo input, .numeroFolhas input {
@@ -136,11 +129,15 @@ input {
 }
 
 .ano_assunto .assunto {
-    flex: 90%;
+    flex: 70%;
 }
 
 .ano_assunto .ano {
-    flex: 10%;
+    flex: 15%;
+}
+
+.ano_assunto .numeroFolhas{
+    flex:15%;
 }
 
 #ibotaoAdicionarAssunto, #ibotaoAdicionarCoorientador{
@@ -234,5 +231,9 @@ input {
 .checkbox-label label {
     margin-left: 5px; /* Espaço entre a checkbox e o texto */
     font-size: 9;
+}
+
+#iorientadora{
+    margin-left: 20px;
 }
 

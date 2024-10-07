@@ -1,90 +1,465 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste de Modalidades</title>
-    <style>
-        /* Apenas para dar um pouco de estilo básico */
-        .modalidades {
-            margin-bottom: 20px;
-        }
-        select {
-            margin-top: 10px;
-            display: block;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="application-name" content="Ficha de Identificação da Obra">
+<meta name="description" content="Sistema de criação de ficha de identificação de obra">
+<meta name="keywords" content="ficha, identificação">
+<meta name="robots" content="index,nofollow">
+<!-- Tecnologia, Conteúdos Digitais e Inovação-TECDI -->
+<!-- Biblioteca Universitária-BU -->
+<!-- Universidade Federal de Santa Catarina-UFSC -->
+<!-- UI Danilo Felicio Jr -->
+<!-- Based on 'Freelance' free to use MIT licensed Bootstrap theme created by Start Bootstrap http://startbootstrap.com-->
+<!-- Código fonte original cedido pelo Instituto de Ciências Matemáticas e de Computação (ICMC) da USP -->
+<!-- Versão do sistema: Biblioteca Universitária da Universidade Federal de Santa Catarina -->
+<title>Ficha catalográfica para trabalhos acadêmicos</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="images/BU_ico32.png">
+<!-- Font Awesome icons --> 
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script> 
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="styles.css" rel="stylesheet">
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/ficha.js"></script>
+<script>
+        $(function () {
+            $("[data-toggle='tooltip']").tooltip();
+        });
+    </script> 
 </head>
-<body>
-    <div class="modalidades">
-        <h2>Modalidade</h2><span class="marcaCampoObrigatorio">*</span>
-        <input
-            id="graduacao"
-            type="radio"
-            name="modalidade"
-            value="Graduacao"
-            onclick="mostrarSelect()"
-        > Graduação
-        <input
-            id="posGraduacao"
-            type="radio"
-            name="modalidade"
-            value="PosGraduacao"
-            onclick="mostrarSelect()"
-        > Pós-Graduação
-        <input
-            id="especializacao"
-            type="radio"
-            name="modalidade"
-            value="Especializacao"
-            onclick="mostrarSelect()"
-        > Especialização
-    </div>
+<body id="page-top">
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container"> 
+        <a class="navbar-brand">Ficha catalográfica<br class="brnodisplay"> para trabalhos acadêmicos</a>
+        <img class="masthead-avatar mb-5" src="images/BU_VARIACOES-05_logo.png" alt="logotipo da biblioteca universitaria">
 
-    <!-- Selects escondidos por padrão -->
-    <div id="selectGraduacao" style="display:none;">
-        <label for="cursoGraduacao">Escolha o curso de graduação:</label>
-        <select id="cursoGraduacao" name="cursoGraduacao">
-            <option value="Engenharia">Engenharia</option>
-            <option value="Ciências">Ciências</option>
-            <option value="Direito">Direito</option>
-        </select>
     </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column"><img class="masthead-avatar mb-5" src="images/BU_VARIACOES-05.png" alt="logotipo da biblioteca universitaria">
+        <h1 class="masthead-heading mb-0">Ficha catalográfica para trabalhos acadêmicos</h1>
+        <div class="divider-custom divider-light"></div>
+        <p class="masthead-subheading font-weight-light mb-0">Biblioteca Universitária / UFSC</p>
+    </div>
+</header>
 
-    <div id="selectPosGraduacao" style="display:none;">
-        <label for="cursoPosGraduacao">Escolha o curso de pós-graduação:</label>
-        <select id="cursoPosGraduacao" name="cursoPosGraduacao">
-            <option value="Mestrado">Mestrado</option>
-            <option value="Doutorado">Doutorado</option>
-        </select>
-    </div>
+<!-- FICHA DE IDENTIFICACAO DA OBRA-->
+<section class="page-section" id="contact">
+    <div class="container">
+        <h1 class="page-section-heading text-center text-uppercase text-secondary mb-0">Entrada de dados</h1>
+        <div class="divider-custom"></div>
+        <!-- Form-->
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-8">
+                <div class="alert alert-warning col-md-12 col-sm-12 col-md-offset-3"> <strong>Atenção!</strong> Para preencher corretamente a sua ficha, por favor leia o <a href="https://portalbu.ufsc.br/ficha/" target="_blank" class="alert-link">tutorial para preenchimento.</a></div>
+                <div class="container">                    
+                    <div class="panel panel-primary dialog-panel">
+                        <div class="panel-body">
 
-    <div id="selectEspecializacao" style="display:none;">
-        <label for="cursoEspecializacao">Escolha o curso de especialização:</label>
-        <select id="cursoEspecializacao" name="cursoEspecializacao">
-            <option value="Gestão de Projetos">Gestão de Projetos</option>
-            <option value="TI">TI</option>
-        </select>
+                            <!-- FORMULARIO -->
+                            <form id="UFSCform" class="form-horizontal" name="ficha" method="post" onsubmit="return validateForm()">
+                                <div class="form-group">
+
+                                    <!-- TIPO TRABALHO -->                                    
+                                    <div id="tipoTrabalho" class="col-lg-12" data-toggle="buttons" role="group" aria-label="Basic radio toggle button group">
+                                        <label class="h6 col-md-12">Tipo do Trabalho:</label>
+                                        <div class="btn btn-group col-md-12 col-sm-12" id="selecaoTrabalho" data-toggle="buttons" style="justify-content: center; display:flex">                                            
+                                                <input type="radio" class="btn-check" id="tipoRelatorio" name="trabalho" value="relatorioDeEstagio" autocomplete="off" onclick="exibeCursoPrograma()" required>
+                                                <label id="tipoTrabalho1" for="tipoRelatorio" class="btn btn-outline-secondary"><span>Relatório<br>de Estágio</span></label>
+                                                <!-- -->                                                                
+                                                <input type="radio" class="btn-check" id="tipoTcc" name="trabalho" value="tccGraduacao" autocomplete="off" onclick="exibeCursoPrograma()">
+                                                <label id="tipoTrabalho2" for="tipoTcc" class="btn btn-outline-secondary"><span>Trabalho de Conclusão<br>de Curso (TCC)</span></label>
+                                                <!-- -->                                            
+                                                <input type="radio" class="btn-check" id="tipoMonografiaEspec" name="trabalho" value="especializacao" autocomplete="off" onclick="exibeCursoPrograma()">
+                                                <label id="tipoTrabalho3" for="tipoMonografiaEspec" class="btn btn-outline-secondary"><span>Monografia de<br>Especialização</span> </label>
+                                        </div>
+                                        <div class="btn btn-group col-lg-12 col-sm-12" style="justify-content: center; display:flex">                                                    
+                                                <input type="radio" class="btn-check" id="tipoMestrado" name="trabalho" value="mestrado" autocomplete="off" onclick="exibeCursoPrograma()">
+                                                <label id="tipoTrabalho4" for="tipoMestrado" class="btn btn-outline-secondary"><span>Dissertação<br>(Mestrado Acadêmico)</span></label>
+                                                <!-- -->                                            
+                                                <input type="radio" class="btn-check" id="tipoMestradoProfissional" name="trabalho" value="mestradoProfissional" autocomplete="off" onclick="exibeCursoPrograma()">
+                                                <label id="tipoTrabalho5" for="tipoMestradoProfissional" class="btn btn-outline-secondary"><span>Dissertação<br>(Mestrado Profissional)</span></label>
+                                        </div>
+                                        <div class="btn btn-group col-lg-12 col-sm-12" style="justify-content: center; display:flex">                                            
+                                                <input type="radio" class="btn-check" id="tipoTese" name="trabalho" value="tese" autocomplete="off" onclick="exibeCursoPrograma()">
+                                                <label id="tipoTrabalho6" for="tipoTese" class="btn btn-outline-secondary"><span>Tese</span></label>
+                                                <!-- -->                                            
+                                                <input type="radio" class="btn-check" id="tipoRelatorioPosDr" name="trabalho" value="relatorioDePosDoutorado" autocomplete="off" onclick="exibeCursoPrograma()">
+                                                <label id="tipoTrabalho7" for="tipoRelatorioPosDr" class="btn btn-outline-secondary"><span>Relatório de Pós-Doutorado</span></label>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <!-- QTIDADE AUTORES -->                                    
+                                    <div id="qtidadeAutores" class="col-md-12">
+                                        <label class="h6">Quantos autores?</label>
+                                        <div class="btn btn-group col-md-12" data-toggle="buttons" role="group" aria-label="Basic radio toggle button group" style="justify-content: center; display:flex">                                        
+                                                <input type="radio" id="checkboxAutor1" name="qtidadeAutores" value="1" class="btn-check focus active" autocomplete="off" checked onclick="adiciona1Autor()">                                        
+                                                <label id="btnAutor1" for="checkboxAutor1" class="btn btn-outline-secondary">Um autor</label>
+                                                <!-- -->
+                                                <input type="radio" id="checkboxAutor2" name="qtidadeAutores" value="2" class="btn-check" autocomplete="off" onclick="adiciona2Autor()">
+                                                <label id="btnAutor2" for="checkboxAutor2" class="btn btn-outline-secondary"><span>Dois autores</span></label>
+                                                <!-- -->
+                                                <input type="radio" id="checkboxAutor3" name="qtidadeAutores" value="3" class="btn-check" autocomplete="off" onclick="adiciona3Autor()">
+                                                <label id="btnAutor3" for="checkboxAutor3" class="btn btn-outline-secondary"><span>Três autores</span></label>
+                                        </div>
+                                    </div>
+                                    <hr style="width:100%">                            
+
+                                    <!-- AUTOR -->
+                                    <div id="formAutor" class="col-md-12">                                        
+                                        <div id="formAutor1" class="row">
+                                            <label id="labelAutor" for="nomeAutor1" class="control-label col-md-8 col-md-offset-0 h6">Autor(a)</label>
+                                            <div id="nomeAutor1" class="col-md-8">
+                                                <label id="labelNomeAutor1" for="fieldNomeAutor1" class="control-label col-md-8 col-md-offset-0">Nome:</label>
+                                                <input type="text" id="fieldNomeAutor1" name="nomeAutor1" class="form-control" placeholder="Nome completo sem o último sobrenome" data-toggle="tooltip" data-placement="bottom" title="Informe o nome completo do autor sem o último sobrenome" required>
+                                            </div>
+                                            <div id="sobrenomeAutor1" class="col-md-4">
+                                                <label id="labelSobrenomeAutor1" for="fieldSobrenomeAutor1" class="control-label col-md-4 col-md-offset-0">Sobrenome:</label>
+                                                <input type="text" id="fieldSobrenomeAutor1" name="sobrenomeAutor1" class="form-control" placeholder="Último sobrenome" data-toggle="tooltip" data-placement="bottom" title="Informe o último sobrenome do autor" required>
+                                            </div>
+                                        </div>
+                                        <div id="formAutor2" class="row" style="display:none">
+                                            <div class="row">
+                                                <label id="labelAutor2" for="nomeAutor2" class="control-label col-md-8 col-md-offset-0 h6">Segundo autor</label>
+                                                <div id="nomeAutor2" class="col-md-8">
+                                                    <label id="labelNomeAutor2" for="fieldNomeAutor2" class="control-label col-md-8 col-md-offset-0">Nome:</label>
+                                                    <input type="text" id="fieldNomeAutor2" name="nomeAutor2" class="form-control" placeholder="Nome completo sem o último sobrenome" data-toggle="tooltip" data-placement="bottom" title="Informe o nome completo do autor sem o último sobrenome">
+                                                </div>
+                                                <div id="sobrenomeAutor2" class="col-md-4">
+                                                    <label id="labelSobrenomeAutor2" for="fieldSobrenomeAutor2" class="control-label col-md-4 col-md-offset-0">Sobrenome:</label>
+                                                    <input type="text" id="fieldSobrenomeAutor2" name="sobrenomeAutor2" class="form-control" placeholder="Último sobrenome" data-toggle="tooltip" data-placement="bottom" title="Informe o último sobrenome do autor">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="formAutor3" class="row" style="display:none">
+                                            <div class="row">
+                                                <label id="labelAutor3" for="nomeAutor3" class="control-label col-md-8 col-md-offset-0 h6">Terceiro autor</label>
+                                                <div id="nomeAutor3" class="col-md-8">
+                                                    <label id="labelNomeAutor3" for="fieldNomeAutor3" class="control-label col-md-8 col-md-offset-0">Nome:</label>
+                                                    <input type="text" id="fieldNomeAutor3" name="nomeAutor3" class="form-control" placeholder="Nome completo sem o último sobrenome" data-toggle="tooltip" data-placement="bottom" title="Informe o nome completo do autor sem o último sobrenome">
+                                                </div>
+                                                <div id="sobrenomeAutor3" class="col-md-4">
+                                                    <label id="labelSobrenomeAutor3" for="fieldSobrenomeAutor3" class="control-label col-md-4 col-md-offset-0">Sobrenome:</label>
+                                                    <input type="text" id="fieldSobrenomeAutor3" name="sobrenomeAutor3" class="form-control" placeholder="Último sobrenome" data-toggle="tooltip" data-placement="bottom" title="Informe o último sobrenome do autor">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    
+                                    <!-- ORIENTADOR -->
+                                    <div id="formOrientadores" class="col-md-12"> 
+                                        <!-- Um orientador -->
+                                        <div id="orientadorFields" class="col-md-12">
+                                            <label id="labelOrientador" for="formOrientador" class="control-label col-md-8 col-md-offset-0 h6">Orientador</label>
+                                            <div id="formOrientador" class="row">
+                                                <div class="col-md-8">
+                                                    <label id="labelNomeOrientador" for="fieldNomeOrientador" class="control-label col-md-8 col-md-offset-0">Nome:</label>
+                                                    <input type="text" id="fieldNomeOrientador" name="nomeOrientador" class="form-control" placeholder="Nome completo sem o último sobrenome" 
+                                                        data-toggle="tooltip" data-placement="bottom" title="Informe o nome completo do orientador sem o último sobrenome" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label id="labelSobrenomeOrientador" for="inputSobrenomeOrientador" class="control-label col-md-4 col-md-offset-0">Sobrenome:</label>
+                                                    <input type="text" id="inputSobrenomeOrientador" name="sobrenomeOrientador" class="form-control" placeholder="Último sobrenome" 
+                                                        data-toggle="tooltip" data-placement="bottom" title="Informe o último sobrenome do orientador" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="orientadorButtons" class="row">
+                                            <div id="orientadora" class="form-check form-switch col-md-2 offset-md-1 offset-sm-1 offset-lg-1">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="checkboxOrientadora" name="orientadora" value="a" data-toggle="tooltip" data-placement="bottom"
+                                                    title="Marque esta opção caso&#013seja uma orientadora" onclick="trocaLabelOrientadora()">
+                                                <label class="form-check-label" id="labelOrientadora" for="checkboxOrientadora" >Orientadora</label>
+                                            </div>
+                                            <div id="orientador2checkbox" class="form-check form-switch col-md-4 offset-md-1 offset-sm-1 offset-lg-1" data-toggle="buttons">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="checkboxDoisOrientadores" name="orientador2" onclick="adicionaOrientador()">
+                                                <label class="form-check-label" id="labelDoisOrientadores" for="checkboxDoisOrientadores">Dois Orientadores</label>
+                                            </div>
+                                        </div>
+                                        <!-- segundo orientador -->
+                                        <p></p>
+                                        <div id="orientador2panel" class="row" style="display:none">
+                                            <div id="orientador2Fields" class="col-md-12">
+                                                <label id="labelSegundoOrientador" for="formOrientador2" class="control-label col-md-8 col-md-offset-0 h6">Orientador</label>
+                                                <div id="formOrientador2" class="row">
+                                                    <div id="fieldNomeOrientador2" class="col-md-8">
+                                                        <label id="labelNomeOrientador2" for="inputNomeOrientador2" class="control-label col-md-8 col-md-offset-0">Nome:</label>
+                                                        <input type="text" id="inputNomeOrientador2" name="nomeOrientador2" class="form-control" placeholder="Nome completo sem o último sobrenome" 
+                                                        data-toggle="tooltip" data-placement="bottom" title="Informe o nome completo do segundo orientador sem o último sobrenome">
+                                                    </div>
+                                                    <div id="fieldSobrenomeOrientador2" class="col-md-4">
+                                                        <label id="labelSobrenomeOrientador2" for="inputSobrenomeOrientador2" class="control-label col-md-4 col-md-offset-0">Sobrenome:</label>
+                                                        <input type="text" id="inputSobrenomeOrientador2" name="sobrenomeOrientador2" class="form-control" placeholder="Último sobrenome" 
+                                                            data-toggle="tooltip" data-placement="bottom" title="Informe o último sobrenome do segundo orientador">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="orientador2Buttons" class="row">
+                                                <div id="orientadora2" class="form-check form-switch col-md-2 offset-md-1 offset-sm-1 offset-lg-1">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="checkboxOrientadora2" name="orientadora2" value="a" data-toggle="tooltip" data-placement="bottom"
+                                                        title="Marque esta opção caso&#013seja uma orientadora" onclick="trocaLabelOrientadora2()">
+                                                    <label class="form-check-label" id="labelOrientadora2" for="checkboxOrientadora2" >Orientadora</label>
+                                                </div>
+                                                <div id="orientadorCotutelaCheckbox" class="form-check form-switch col-md-4 offset-md-1 offset-sm-1 offset-lg-1" data-toggle="buttons">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="checkboxCoTutela" name="orientadorCotutela" value="1">
+                                                    <label class="form-check-label" id="labelOrientadorCotutela" for="checkboxCoTutela">Cotutela</label>
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                    <p></p>
+
+                                    <!--COORIENTADOR-->
+                                    <div id="formCoorientadores" class="col-md-12"> 
+                                        <!-- Um coorientador -->
+                                        <div id="coorientadorFields" class="col-md-12">
+                                            <label id="labelCoorientador" for="formCoorientador" class="control-label col-md-8 col-md-offset-0 h6">Coorientador</label>
+                                            <div id="formCoorientador" class="row">
+                                                <div id="fieldNomeCoorientador" class="col-md-8">
+                                                    <label id="labelNomeCoorientador" for="inputNomeCoorientador" class="control-label col-md-8 col-md-offset-0">Nome:</label>
+                                                    <input type="text" id="inputNomeCoorientador" name="nomeCoorientador" class="form-control" placeholder="Nome completo sem o último sobrenome" 
+                                                                data-toggle="tooltip" data-placement="bottom" title="Informe o nome completo do coorientador sem o último sobrenome">
+                                                </div>
+                                                <div id="fieldSobrenomeCoorientador" class="col-md-4">
+                                                    <label id="labelSobrenomeCoorientador" for="inputSobrenomeCoorientador" class="control-label col-md-4 col-md-offset-0">Sobrenome:</label>
+                                                    <input type="text" id="inputSobrenomeCoorientador" name="sobrenomeCoorientador" class="form-control" placeholder="Último sobrenome" 
+                                                                data-toggle="tooltip" data-placement="bottom" title="Informe o último sobrenome do coorientador">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="coorientadorButtons" class="row">
+                                             <div id="coorientadora" class="form-check form-switch col-md-2 offset-md-1 offset-sm-1 offset-lg-1">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="checkboxCoorientadora" name="coorientadora" value="a" data-toggle="tooltip" data-placement="bottom"
+                                                    title="Marque esta opção caso&#013seja uma orientadora" onclick="trocaLabelCoorientadora()">
+                                                <label class="form-check-label" id="labelCheckboxCoorientadora" for="checkboxCoorientadora" >Orientadora</label>
+                                            </div>
+                                            <div id="coorientador2checkbox" class="form-check form-switch col-md-4 offset-md-1 offset-sm-1 offset-lg-1" data-toggle="buttons">
+                                                <input class="form-check-input" type="checkbox" role="switch" id="checkboxCoorientador2" name="coorientador2" value="1" onclick="adicionaCoorientador()">
+                                                <label class="form-check-label" id="label2Coorientadores" for="checkboxCoorientador2">Dois Coorientadores</label>
+                                            </div>
+                                        </div>
+                                        <!-- segundo coorientador -->
+                                        <p></p>
+                                        <div id="coorientador2panel" class="row" style="display:none">
+                                            <div id="coorientador2Fields" class="col-md-12">
+                                                <label id="labelSegundoCoorientador" for="formCoorientador2" class="control-label col-md-8 col-md-offset-0 h6">Coorientador</label>
+                                                <div id="formCoorientador2" class="row">
+                                                    <div id="fieldNomeCoorientador2" class="col-md-8">
+                                                        <label id="labelNomeCoorientador2" for="inputNomeCoorientador2" class="control-label col-md-8 col-md-offset-0">Nome:</label>
+                                                        <input type="text" id="inputNomeCoorientador2" name="nomeCoorientador2" class="form-control" placeholder="Nome completo sem o último sobrenome" 
+                                                                        data-toggle="tooltip" data-placement="bottom" title="Informe o nome completo do segundo coorientador sem o último sobrenome">
+                                                    </div>
+                                                    <div id="fieldSobrenomeCoorientador2" class="col-md-4">
+                                                        <label id="labelSobrenomeCoorientador2" for="inputSobrenomeCoorientador2" class="control-label col-md-4 col-md-offset-0">Sobrenome:</label>
+                                                        <input type="text" id="inputSobrenomeCoorientador2" name="sobrenomeCoorientador2" class="form-control" placeholder="Último sobrenome" 
+                                                                        data-toggle="tooltip" data-placement="bottom" title="Informe o último sobrenome do segundo coorientador">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="coorientador2Buttons" class="row">        
+                                                <div id="coorientadora2" class="form-check form-switch col-md-2 offset-md-1 offset-sm-1 offset-lg-1">
+                                                    <input class="form-check-input" type="checkbox" role="switch" id="checkboxCoorientadora2" name="coorientadora2" value="a" data-toggle="tooltip" data-placement="bottom"
+                                                    title="Marque esta opção caso&#013seja uma orientadora" onclick="trocaLabelCoorientadora2()">
+                                                    <label class="form-check-label" id="labelCheckboxCoorientadora2" for="checkboxCoorientadora2" >Orientadora</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <!-- DADOS DO TRABALHO -->
+                                    <div id="formDadosTrabalho" class="col-md-12">
+                                        <label id="labelDadosTrabalho" for="dados" class="control-label col-md-8 col-md-offset-0 h6">Dados do trabalho</label> 
+                                        <div id="dados" class="row"> 
+                                            <!-- Titulo -->                                                                                   
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label id="labelTitulo" for="inputTitulo" class="control-label col-md-12 col-md-offset-2">Título do Trabalho:</label>
+                                                    <input type="text" id="inputTitulo" name="titulo" class="form-control was-validated" data-toggle="tooltip" data-placement="bottom" title="Informe o título do trabalho" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label id="labelSubtitulo" for="inputSubtitulo" class="control-label col-md-12 col-md-offset-2">Subtítulo do Trabalho:</label>
+                                                    <input type="text" id="inputSubtitulo" name="subtitulo" class="form-control" data-toggle="tooltip" data-placement="bottom" title="Informe o subtítulo do trabalho, se houver" >
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Programa de PG -->                                            
+                                            <div class="col-md-12">
+                                                <div id="programa" class="form-group" style="display:flex">
+                                                    <label id="labelPrograma" for="selectPrograma" class="control-label col-md-12 col-sm-12 col-md-offset-0">Programa:
+                                                    <select id="selectPrograma" name="programa" class="form-control selectpicker col-md-12 col-sm-12 col-md-offset-0" style="margin-bottom:10px" onclick="consoleDisplay()" data-toggle="tooltip" data-placement="top" title="Selecione o programa de pós-graduação">
+                                                        <option disabled selected value>Selecione o programa...</option>
+                                                        <option>Programa de Mestrado Profissional em Letras - PROFLETRAS</option><option>Programa de Mestrado Profissional em Matemática em Rede Nacional - PROFMAT</option><option>Programa de Pós-Graduação em Administração Universitária</option><option>Programa de Pós-Graduação em Administração</option><option>Programa de Pós-Graduação em Agroecossistemas</option><option>Programa de Pós-Graduação em Antropologia Social</option><option>Programa de Pós-Graduação em Aquicultura</option><option>Programa de Pós-Graduação em Arquitetura e Urbanismo</option><option>Programa de Pós-Graduação em Assistência Farmacêutica</option><option>Programa de Pós-Graduação em Biologia Celular e do Desenvolvimento</option><option>Programa de Pós-Graduação em Biologia de Fungos, Algas e Plantas</option><option>Programa de Pós-Graduação em Bioquímica</option><option>Programa de Pós-Graduação em Biotecnologia e Biociências</option><option>Programa de Pós-Graduação em Ciência da Computação</option><option>Programa de Pós-Graduação em Ciência da Informação</option><option>Programa de Pós-Graduação em Ciência dos Alimentos</option><option>Programa de Pós-Graduação em Ciência e Engenharia de Materiais</option><option>Programa de Pós-Graduação em Ciências da Reabilitação</option><option>Programa de Pós-Graduação em Ciências Médicas</option><option>Programa de Pós-Graduação em Contabilidade</option><option>Programa de Pós-Graduação em Controle de Gestão</option><option>Programa de Pós-Graduação em Cuidados Intensivos e Paliativos</option><option>Programa de Pós-Graduação em Desastres Naturais</option><option>Programa de Pós-Graduação em Design</option><option>Programa de Pós-Graduação em Direito</option><option>Programa de Pós-Graduação em Ecologia</option><option>Programa de Pós-Graduação em Economia</option><option>Programa de Pós-Graduação em Ecossistemas Agrícolas e Naturais</option><option>Programa de Pós-Graduação em Educação Científica e Tecnológica</option><option>Programa de Pós-Graduação em Educação Física</option><option>Programa de Pós-Graduação em Educação</option><option>Programa de Pós-Graduação em Energia e Sustentabilidade</option><option>Programa de Pós-Graduação em Enfermagem</option><option>Programa de Pós-Graduação em Engenharia Ambiental</option><option>Programa de Pós-Graduação em Engenharia Civil</option><option>Programa de Pós-Graduação em Engenharia de Alimentos</option><option>Programa de Pós-Graduação em Engenharia de Automação e Sistemas</option><option>Programa de Pós-Graduação em Engenharia de Produção</option><option>Programa de Pós-Graduação em Engenharia de Sistemas Eletrônicos</option><option>Programa de Pós-Graduação em Engenharia de Transportes e Gestão Territorial</option><option>Programa de Pós-Graduação em Engenharia e Ciências Mecânicas</option><option>Programa de Pós-Graduação em Engenharia e Gestão do Conhecimento</option><option>Programa de Pós-Graduação em Engenharia Elétrica</option><option>Programa de Pós-Graduação em Engenharia Mecânica</option><option>Programa de Pós-Graduação em Engenharia Química</option><option>Programa de Pós-Graduação em Engenharia Têxtil</option><option>Programa de Pós-Graduação em Ensino de Física</option><option>Programa de Pós-Graduação em Ensino de História</option><option>Programa de Pós-Graduação em Estudos da Tradução</option><option>Programa de Pós-Graduação em Farmácia</option><option>Programa de Pós-Graduação em Farmacologia</option><option>Programa de Pós-Graduação em Filosofia</option><option>Programa de Pós-Graduação em Física</option><option>Programa de Pós-Graduação em Fonoaudiologia</option><option>Programa de Pós-Graduação em Geografia</option><option>Programa de Pós-Graduação em Geologia</option><option>Programa de Pós-Graduação em Gestão do Cuidado em Enfermagem</option><option>Programa de Pós-Graduação em Gestão do Cuidado em Enfermagem - Modalidade Profissional</option><option>Programa de Pós-Graduação em História</option><option>Programa de Pós-Graduação em Informática em Saúde</option><option>Programa de Pós-Graduação em Inglês: Estudos Linguísticos e Literários</option><option>Programa de Pós-Graduação em Jornalismo</option><option>Programa de Pós-Graduação em Letras</option><option>Programa de Pós-Graduação em Letras/Inglês e Literatura Correspondente</option><option>Programa de Pós-Graduação em Linguística</option><option>Programa de Pós-Graduação em Literatura</option><option>Programa de Pós-Graduação em Matemática Pura e Aplicada</option><option>Programa de Pós-Graduação em Matemática</option><option>Programa de Pós-Graduação em Medicina Veterinária Convencional e Integrativa</option><option>Programa de Pós-Graduação em Métodos e Gestão em Avaliação</option><option>Programa de Pós-Graduação em Nanociência, Processos e Materiais Avançados</option><option>Programa de Pós-Graduação em Nanotecnologia Farmacêutica</option><option>Programa de Pós-Graduação em Neurociências</option><option>Programa de Pós-Graduação em Nutrição</option><option>Programa de Pós-Graduação em Oceanografia</option><option>Programa de Pós-Graduação em Odontologia</option><option>Programa de Pós-Graduação em Perícias Criminais Ambientais</option><option>Programa de Pós-Graduação em Propriedade Intelectual e Transferência de Tecnologia para Inovação</option><option>Programa de Pós-Graduação em Psicologia</option><option>Programa de Pós-Graduação em Química</option><option>Programa de Pós-Graduação em Recursos Genéticos Vegetais</option><option>Programa de Pós-Graduação em Relações Internacionais</option><option>Programa de Pós-Graduação em Saúde Coletiva</option><option>Programa de Pós-Graduação em Saúde Mental e Atenção Psicossocial</option><option>Programa de Pós-Graduação em Saúde Pública</option><option>Programa de Pós-Graduação em Serviço Social </option><option>Programa de Pós-Graduação em Sociologia e Ciência Política</option><option>Programa de Pós-Graduação em Sociologia Política</option><option>Programa de Pós-Graduação em Tecnologias da Informação e Comunicação</option><option>Programa de Pós-Graduação Interdisciplinar em Ciências Humanas</option><option>Programa de Pós-Graduação Multicêntrico em Ciências Fisiológicas</option><option>Programa de Pós-Graduação Multidisciplinar em Saúde</option><option>Programa de Pós-Graduação Profissional em Ensino de Biologia - PROFBIO</option><option>Mestrado Nacional Profissional em Ensino de Física</option><option>Mestrado Profissional em Farmacologia</option>                                                    </select></label>
+                                                </div>
+
+
+                                                <script>
+                                                  function consoleDisplay(key) {
+                                                   var index = document.getElementById("programa").selectedIndex;
+                                                   //var wtfisthis = index.options[index.selectedIndex].value;
+                                                   console.log('key: ' + key);
+                                                   console.log('programa selecionado: ' + $("#programa :selected").text());
+                                                   console.log('valor selecionado: ' + $("#elementId").val());
+                                                   console.log($("#programa :selected").index());                                       
+                                                   //document.getElementById("result").innerHTML = "The selected index is :" + index;
+                                                    }
+                                                </script>
+                                                                                                 
+                                                <!-- Cursos de Graduacao -->
+                                                <div id="curso" class="col-md-12">                                                    
+                                                    <div id="cursoGraduacao" style="display:none" class="form-group">  
+                                                        <label id="labelCurso" for="selectCurso" class="control-label col-md-12 col-sm-12 col-md-offset-0">Curso:                                                  
+                                                        <select id="selectCurso" name="cursoGraduacao" class="form-control selectpicker col-md-12 col-sm-12 col-md-offset-0" data-toggle="tooltip" data-placement="top" title="Selecione o curso de graduação">
+                                                            <option disabled selected value>Selecione o Curso...</option>
+                                                            <option>Graduação em Administração Pública</option><option>Graduação em Administração</option><option>Graduação em Agronomia</option><option>Graduação em Animação</option><option>Graduação em Antropologia</option><option>Graduação em Arquitetura e Urbanismo</option><option>Graduação em Arquivologia</option><option>Graduação em Artes Cênicas</option><option>Graduação em Biblioteconomia</option><option>Graduação em Ciência da Informação</option><option>Graduação em Ciência e Tecnologia de Alimentos</option><option>Graduação em Ciência e Tecnologia</option><option>Graduação em Ciências Biológicas</option><option>Graduação em Ciências Contábeis</option><option>Graduação em Ciências da Computação</option><option>Graduação em Ciências Econômicas </option><option>Graduação em Ciências Rurais</option><option>Graduação em Ciências Sociais        </option><option>Graduação em Cinema</option><option>Graduação em Design de Produto</option><option>Graduação em Design</option><option>Graduação em Direito</option><option>Graduação em Educação do Campo</option><option>Graduação em Educação Física</option><option>Graduação em Enfermagem</option><option>Graduação em Engenharia Aeroespacial</option><option>Graduação em Engenharia Automotiva</option><option>Graduação em Engenharia Civil de Infraestrutura</option><option>Graduação em Engenharia Civil</option><option>Graduação em Engenharia de Alimentos</option><option>Graduação em Engenharia de Aquicultura</option><option>Graduação em Engenharia de Computação</option><option>Graduação em Engenharia de Controle e Automação</option><option>Graduação em Engenharia de Energia</option><option>Graduação em Engenharia de Infraestrutura</option><option>Graduação em Engenharia de Materiais </option><option>Graduação em Engenharia de Produção Civil</option><option>Graduação em Engenharia de Produção Elétrica</option><option>Graduação em Engenharia de Produção Mecânica</option><option>Graduação em Engenharia de Transportes e Logística</option><option>Graduação em Engenharia Elétrica</option><option>Graduação em Engenharia Eletrônica</option><option>Graduação em Engenharia Ferroviária e Metroviária</option><option>Graduação em Engenharia Florestal</option><option>Graduação em Engenharia Mecânica</option><option>Graduação em Engenharia Mecatrônica</option><option>Graduação em Engenharia Naval</option><option>Graduação em Engenharia Química</option><option>Graduação em Engenharia Sanitária e Ambiental</option><option>Graduação em Engenharia Têxtil</option><option>Graduação em Farmácia</option><option>Graduação em Filosofia</option><option>Graduação em Física</option><option>Graduação em Fisioterapia</option><option>Graduação em Fonoaudiologia</option><option>Graduação em Geografia</option><option>Graduação em Geologia</option><option>Graduação em História</option><option>Graduação em Jornalismo</option><option>Graduação em Letras - LIBRAS</option><option>Graduação em Letras - Língua Alemã</option><option>Graduação em Letras - Língua Espanhola</option><option>Graduação em Letras - Língua Francesa</option><option>Graduação em Letras - Língua Inglesa</option><option>Graduação em Letras - Língua Italiana</option><option>Graduação em Letras - Língua Portuguesa</option><option>Graduação em Matemática - Bacharelado</option><option>Graduação em Matemática - Licenciatura</option><option>Graduação em Matemática e Computação Científica</option><option>Graduação em Medicina Veterinária</option><option>Graduação em Medicina</option><option>Graduação em Meteorologia</option><option>Graduação em Museologia</option><option>Graduação em Nutrição</option><option>Graduação em Oceanografia</option><option>Graduação em Odontologia</option><option>Graduação em Pedagogia</option><option>Graduação em Psicologia</option><option>Graduação em Química - Bacharelado</option><option>Graduação em Química - Licenciatura</option><option>Graduação em Relações Internacionais</option><option>Graduação em Secretariado Executivo</option><option>Graduação em Serviço Social</option><option>Graduação em Sistemas de Informação</option><option>Graduação em Tecnologias da Informação e Comunicação</option><option>Graduação em Zootecnia</option><option>Licenciatura Intercultural Indígena do Sul da Mata Atlântica</option>                                                        </select></label>                                   
+                                                    </div>
+                                                    <div id="fieldOutroCurso" class="row" style="display:none">
+                                                        <div class="col-md-12">
+                                                            <label id="labelOutroCurso" for="inputOutroCurso" class="control-label col-md-12 col-md-offset-0">Curso:</label>
+                                                            <input type="text" id="inputOutroCurso" name="cursoOutro" class="form-control col-md-12" placeholder="Informe o nome do curso..." 
+                                                                                    data-toggle="tooltip" data-placement="bottom" title="Informe o nome do curso">
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                                
+                                                <!-- Centro ou Campus -->                                                
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label id="labelCentro" for="centroEnsino" class="control-label col-md-12 col-sm-12 col-md-offset-0">Centro ou Campus:
+                                                        <select id="centroEnsino" name="centro" class="form-control selectpicker col-md-12 col-sm-12 col-md-offset-0"  data-toggle="tooltip" data-placement="top" title="Selecione o centro de ensino ou o campus" required>
+                                                            <option disabled selected value>Selecione o centro ou o campus...</option>
+                                                            <option>CCA - Centro de Ciências Agrárias</option><option>CCB - Centro de Ciências Biológicas</option><option>CED - Centro de Ciências da Educação</option><option>CCS - Centro de Ciências da Saúde</option><option>CFM - Centro de Ciências Físicas e Matemáticas</option><option>CCJ - Centro de Ciências Jurídicas</option><option>CCE - Centro de Comunicação e Expressão</option><option>CDS - Centro de Desportos</option><option>CFH - Centro de Filosofia e Ciências Humanas</option><option>CSE - Centro Socioeconômico</option><option>CTC - Centro Tecnológico</option>                                                            <option disabled>-</option>
+                                                            <option>Campus Araranguá</option><option>Campus Blumenau</option><option>Campus Curitibanos</option><option>Campus Joinville</option>                                                        </select></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div id="anoPaginas" class="row">
+                                                    <div id="fieldAno" class="col-md-6">
+                                                        <label id="labelAno" for="inputAno" class="control-label col-md-6 col-md-offset-0">Ano:</label>
+                                                        <input type="number" id="inputAno" min="1960" max="2099" step="1" name="ano" class="form-control" placeholder="Ano de entrega do trabalho" 
+                                                                    data-toggle="tooltip" data-placement="bottom" title="Informe o ano de conclusão do curso" required>
+                                                    </div>
+                                                    <div id="fieldPaginas" class="col-md-6">
+                                                        <label id="labelPaginas" for="inputPaginas" class="control-label col-md-6 col-md-offset-0">Nº de páginas:</label>
+                                                        <input type="number" id="inputPaginas" min="1" name="paginas" class="form-control" placeholder="Número de páginas do trabalho" 
+                                                                    data-toggle="tooltip" data-placement="bottom" title="Informe a quantidade de páginas do trabalho" required>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Assuntos -->                                                      
+                                                <label id="labelAssuntos" for="assuntos" class="control-label col-md-8 col-md-offset-0">Assuntos:</label>
+                                                <div id="assuntos" class="row"> 
+                                                 
+                                                        <div id="helperAssunto0" class="col-md-12 col-md-offset-0" style="display:none"><small class="col-md-12">Neste primeiro assunto preencha com a área geral de sua especialização<br>Exemplo: Ciências Sociais, Odontologia, etc.</small></div>
+                                                        <div id="fieldAssunto0" class="col-md-12 col-md-offset-0" style="display:none">                                                                                                                
+                                                            <input type="text" id="inputAssunto0" name="assunto0" class="form-control" 
+                                                                placeholder="Mínimo 01 assunto, máximo 05 assuntos" 
+                                                                            data-toggle="tooltip" data-placement="bottom" title="Neste primeiro assunto preencha com a área geral de sua especialização&#013Exemplo: Ciências Sociais, Odontologia, etc.">
+                                                        </div>
+                                                  
+                                                    <div id="fieldAssunto1" class="col-md-6 col-md-offset-3" style="display:flex">
+                                                        <input type="text" id="inputAssunto1" name="assunto1" class="form-control" placeholder="Mínimo 01 assunto, máximo 04 assuntos" 
+                                                                        data-toggle="tooltip" data-placement="bottom" title="Informe pelo menos um assunto" required>
+                                                    </div>
+                                                    <div id="fieldAssunto2" class="col-md-6">
+                                                        <input type="text" id="inputAssunto2" name="assunto2" class="form-control" title="Informe opcionalmente um segundo assunto">
+                                                    </div>
+                                                    <div id="fieldAssunto3" class="col-md-6">
+                                                        <input type="text" id="inputAssunto3" name="assunto3" class="form-control" title="Informe opcionalmente um terceiro assunto">
+                                                    </div>
+                                                    <div id="fieldAssunto4" class="col-md-6">
+                                                        <input type="text" id="inputAssunto4" name="assunto4" class="form-control" title="Informe opcionalmente um quarto assunto">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- FORMATO -->
+                                    <!-- O unico formato aceito atualmente eh A4                        
+                                                <div id="formato" class="row">                            
+                                                  <div class="col-md-6">
+                                                    <label id="labelFormato" for="" class="control-label col-md-2 col-md-offset-2">Formato da página:</label>
+                                                     <div id="formatoFicha" data-toggle="buttons">
+                                                        <label id="labelFormatoA5" for="inputFormato" class="btn btn-secondary active"> 
+                                                          <input type="radio" id="inputFormatoA5" name="formatoPagina" value="a5" autocomplete="off" checked/>A5
+                                                        </label>
+                                                        <label id="labelFormatoA4" for="inputFormatoA4" class="btn btn-secondary"> 
+                                                          <input type="radio" id="inputFormatoA4" name="formatoPagina" value="a4"/>A4
+                                                        </label>                  
+                                                     </div><br>
+                                                  </div>                                                                       
+                                                </div> 
+                                    -->                                                                            
+                                    <div id="formato" hidden="hidden">
+                                        <input type="radio" id="inputFormato" name="formatoPagina" value="a4" checked>
+                                    </div>
+                                    <br>
+                                    
+                                    <!-- CONTROLE FORMULARIO -->
+                                    <div id="controle" class="row">
+                                        <div class="col-md-offset-0 col-md-12 col-sm-btn">
+                                            <button class="btn btn-success" style="float:left" type="submit" name="envia" value="Enviar" data-toggle="tooltip" data-placement="bottom" title="Gerar ficha de identificação" onclick="javascript: ficha.action='pdf.php';">Gerar PDF</button>
+                                            <button class="btn btn-success" style="float:left; margin-left: 10px" type="submit" name="envia" value="Enviar" data-toggle="tooltip" data-placement="bottom" title="Gerar ficha de identificação" onclick="javascript: ficha.action='png.php';">Gerar PNG</button>
+                                            <button class="btn btn-primary btn-danger" style="float:right; margin-left: 10px" type="reset" name="Limpar" value="Limpar" data-toggle="tooltip" data-placement="bottom" title="Apagar dados do formulário">Limpar formulário</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
+
+<!-- Footer-->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row"> 
+            <!-- Footer Location-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Endereço</h4>
+                <p class="lead mb-0"> Campus Universitário, Acesso Trindade <br>
+                    Setor D - Florianópolis - SC <br>
+                    CEP: 88040-900 </p>
+            </div>
+            <!-- Footer Social Icons-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Biblioteca Universitária/UFSC</h4>
+                <a class="btn btn-outline-light btn-social mx-1" href="https://bu.ufsc.br"><i class="fab fa fa-globe"></i></a> <a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/bu.ufsc/"><i class="fab fa-fw fa-facebook-f"></i></a> <a class="btn btn-outline-light btn-social mx-1" href="https://www.youtube.com/c/CANALBUUFSC"><i class="fab fa-fw fa-youtube"></i></a> <a class="btn btn-outline-light btn-social mx-1" href="https://www.instagram.com/bu.ufsc/"><i class="fab fa-fw fa-instagram"></i></a> </div>
+            <!-- Footer About Text-->
+            <div class="col-lg-4">
+                <h4 class="text-uppercase mb-4">SUPORTE</h4>
+                <p class="lead mb-0"> Para suporte ao sistema ou outras dúvidas, entre em contato:<br>
+                    <a href="https://atendimento.bu.ufsc.br" style="text-decoration: none;">Portal de Atendimento</a> </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white">
+    <div class="container" style="line-height: 10px;"><small>Créditos: código fonte original cedido pelo Instituto de Ciências Matemáticas e de Computação (ICMC) da USP<br>Versão do sistema: Biblioteca Universitária da Universidade Federal de Santa Catarina</small></div>
 </div>
-    <script>
-        function mostrarSelect() {
-            // Oculta todos os selects de início
-            document.getElementById("selectGraduacao").style.display = "none";
-            document.getElementById("selectPosGraduacao").style.display = "none";
-            document.getElementById("selectEspecializacao").style.display = "none";
-            
-            // Verifica qual radio está selecionado e exibe o select correspondente
-            const modalidadeSelecionada = document.querySelector('input[name="modalidade"]:checked').value;
-            
-            if (modalidadeSelecionada === "Graduacao") {
-                document.getElementById("selectGraduacao").style.display = "block";
-            } else if (modalidadeSelecionada === "PosGraduacao") {
-                document.getElementById("selectPosGraduacao").style.display = "block";
-            } else if (modalidadeSelecionada === "Especializacao") {
-                document.getElementById("selectEspecializacao").style.display = "block";
-            }
-        }
-    </script>
+<!-- LiveReload plugin to sincronously view changes in browser --> 
+<script>document.write('<script src="http://' + (location.host || '${1:localhost}').split(':')[0] + ':${2:35729}/livereload.js?snipver=1"></' + 'script>')</script> 
+<!-- Bootstrap core JS--> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> 
+<!-- Core theme JS--> 
+<script src="js/scripts.js"></script>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>
