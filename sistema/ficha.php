@@ -10,9 +10,9 @@ $nomeOrientador = $_POST['nomeOrientador'];
 $sobrenomeOrientador = $_POST['sobrenomeOrientador'];
 $ano = $_POST['ano'];
 $modalidade = $_POST['modalidade'];
-$cursos = "Processos Gerenciais"; // Exemplo fixo
-$cidade = "Feliz"; // Exemplo fixo
-$campus = "Campus Feliz"; // Exemplo fixo
+$cursos = isset($_POST['curso']) ? $_POST['curso'] : '';
+$campus = isset($_POST['campus']) ? $_POST['campus'] : '';
+$cidade = 'Feliz';
 
 // Verificando se o checkbox "orientadora" está marcado
 $tipoOrientador = isset($_POST['orientadora']) ? 'Orientadora' : 'Orientador';

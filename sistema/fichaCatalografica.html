@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="ficha/ficha.css"/>
-    <script src="ficha/ficha2.js"></script>
+    <script src="ficha/ficha.js"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <title>Ficha Catalográfica</title>
 </head>
@@ -26,7 +26,7 @@
         <main>
             <div class="formulario">
                 <h1>Dados para Ficha Catalográfica</h1>
-                <form action="ficha.php" method="post">                    
+                <form action="ficha.php" method="post" onsubmit="return validarSelecoes();">                    
                     <div class="autor">
                         <h2>Autor</h2>
                         <div class="nome_sobrenome">
@@ -36,76 +36,75 @@
                                     type="text" 
                                     name="nomeAutor"
                                     pattern="[A-Za-zÀ-ÿ\s']+" 
-                                    title="Apenas letras e espaços são permitidos." 
-                                    placeholder="Nome completo sem o último sobrenome:"
+                                    title="Informe o nome completo sem o último sobrenome do autor." 
+                                    placeholder="Informe o nome completo sem o último sobrenome:"
                                     required
                                     oninput="aplicarTitleize('inomeAutor')"
+                                    oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
+                                    oninput="setCustomValidity('')"
                                 >
                             </div>
                             <div class="sobrenome">
-                                <input 
+                                <input ]
                                     id="isobrenomeAutor" 
                                     type="text" 
                                     name="sobrenomeAutor"
                                     pattern="[A-Za-zÀ-ÿ\s']+" 
-                                    title="Apenas letras e espaços são permitidos."
+                                    title="Informe o último sobrenome do autor."
                                     placeholder="Último sobrenome:"
                                     required
                                     oninput="aplicarTitleize('isobrenomeAutor')"
+                                    oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
+                                    oninput="setCustomValidity('')"
                                 >
                             </div>
                         </div>
                     </div>
                     <div class="orientador">
-                        <div class="orientador_orientadora">
-                            <h2>Orientador</h2>
-                            <div class="checkbox-label">
-                                <input
-                                    id="iorientadora"
-                                    type="checkbox"
-                                    name="orientadora"
-                                >
-                                <label for="iOrientadora">Orientadora</label>
-                            </div>
-                        </div>
-                        <div class="nome_sobrenome">
-                            <div class="nome">
-                                <input 
-                                    id="inomeOrientador" 
-                                    type="text" 
-                                    name="nomeOrientador"
-                                    pattern="[A-Za-zÀ-ÿ\s]+" 
-                                    title="Apenas letras e espaços são permitidos." 
-                                    placeholder="Nome completo sem o último sobrenome:"
-                                    required
-                                    oninput="aplicarTitleize('inomeOrientador')"
-                                >
-                            </div>
-                            <div class="sobrenome">
-                                <input 
-                                    id="isobrenomeOrientador" 
-                                    type="text" 
-                                    name="sobrenomeOrientador"
-                                    pattern="[A-Za-zÀ-ÿ\s]+" 
-                                    title="Apenas letras e espaços são permitidos."
-                                    placeholder="Último sobrenome:"
-                                    required
-                                    oninput="aplicarTitleize('isobrenomeOrientador')"
-                                >
-                            </div>
-                        </div>                            
+                        <h2>Orientador</h2>
                     </div>
+                    <div class="nome_sobrenome">
+                        <div class="nome">
+                            <input 
+                                id="inomeOrientador" 
+                                type="text" 
+                                name="nomeOrientador"
+                                pattern="[A-Za-zÀ-ÿ\s]+" 
+                                title="Informe o nome completo sem o último sobrenome do orientador." 
+                                placeholder="Nome completo sem o último sobrenome:"
+                                required
+                                oninput="aplicarTitleize('inomeOrientador')"
+                                oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
+                                oninput="setCustomValidity('')"
+                            >
+                        </div>
+                        <div class="sobrenome">
+                            <input 
+                                id="isobrenomeOrientador" 
+                                type="text" 
+                                name="sobrenomeOrientador"
+                                pattern="[A-Za-zÀ-ÿ\s]+" 
+                                title="Informe o último sobrenome do orientador."
+                                placeholder="Último sobrenome:"
+                                required
+                                oninput="aplicarTitleize('isobrenomeOrientador')"
+                                oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
+                                oninput="setCustomValidity('')"
+                            >
+                        </div>
+                        <div class="checkbox-label">
+                            <input
+                                id="iorientadora"
+                                type="checkbox"
+                                name="orientadora"
+                                title="Orientadora"
+                            >
+                            <label for="iOrientadora">Orientadora</label>
+                        </div>
+                    </div>                            
                     <div class="coorientador">
                         <div class="coorientador_coorientadora">
                             <h2>Coorientador</h2>
-                            <div class="checkbox-label">
-                                <input
-                                    id="icoCoorientadora"
-                                    type="checkbox"
-                                    name="coorientadora"
-                                >
-                                <label for="icoCoorientadora">Coorientadora</label>
-                            </div>
                             <button type="button" id="ibotaoAdicionarCoorientador" onclick="adicionarCoorientador()">
                                 <i class="ph ph-plus"></i>
                             </button>
@@ -121,10 +120,12 @@
                                         type="text"
                                         name="nomeCoorientador1"
                                         pattern="[A-Za-zÀ-ÿ\s]+"
-                                        title="Apenas letras e espaços são permitidos."
+                                        title="Informe o nome completo sem o último sobrenome do coorientador."
                                         placeholder="Nome completo sem o último sobrenome:"
                                         required
-                                        oninput="aplicarTitleize('inomeCoorientador')"
+                                        oninput="aplicarTitleize('inomeCoorientador')" 
+                                        oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
+                                        oninput="setCustomValidity('')"
                                     >
                                 </div>
                                 <div class="sobrenome">
@@ -133,11 +134,20 @@
                                         type="text"
                                         name="sobrenomeCoorientador1"
                                         pattern="[A-Za-zÀ-ÿ\s]+"
-                                        title="Apenas letras e espaços são permitidos."
+                                        title="Informe o último sobrenome do coorientador."
                                         placeholder="Último sobrenome:"
                                         required
                                         oninput="aplicarTitleize('isobrenomeCoorientador')"
                                     >
+                                </div>
+                                <div class="checkbox-label">
+                                    <input
+                                        id="icoCoorientadora"
+                                        type="checkbox"
+                                        name="coorientadora"
+                                        title="Coorientadora"
+                                    >
+                                    <label for="icoCoorientadora">Coorientadora</label>
                                 </div>
                             </div>
                         </div>
@@ -149,6 +159,7 @@
                         type="text" 
                         name="tituloTrabalho"
                         placeholder="Título do Trabalho"
+                        title="Informe o título do trabalho."
                         required
                         >
                     </div>
@@ -161,10 +172,12 @@
                                 type="text" 
                                 name="ano"
                                 pattern="\d+" 
-                                title="Apenas números são permitidos."
+                                title="Informe o ano de cadastro da ficha."
                                 placeholder="Ex:2024"
                                 required
                                 oninput="validarAno()"
+                                oninvalid="setCustomValidity('Apenas números são permitidos.')"
+                                oninput="setCustomValidity('')"
                             >
                         </div>
                         <div class="numeroFolhas">
@@ -174,9 +187,11 @@
                             type="text" 
                             name="numeroFolhas"
                             pattern="\d+" 
-                            title="Apenas números são permitidos."
+                            title="Informe o número de folhas."
                             placeholder="Ex:123"
                             required
+                            oninvalid="setCustomValidity('Apenas números são permitidos.')"
+                            oninput="setCustomValidity('')"
                             >
                         </div>
                         <div class="assunto">
@@ -193,6 +208,7 @@
                                     type="text"
                                     name="assunto1"
                                     placeholder="Assunto 1"
+                                    title="Informe o assunto."
                                     required
                                 >
                             </div>
@@ -203,19 +219,19 @@
                         <h2>Tipo do Trabalho</h2>
                         <div class="opcaoModalidade">
                             <label>
-                                <input type="radio" name="modalidade" value="Graduacao" onclick="mostrarSelect()"> Graduação
+                                <input type="radio" name="modalidade" value="Graduacao" required onclick="mostrarSelect()"> Graduação
                             </label>
                             <label>
-                                <input type="radio" name="modalidade" value="PosGraduacao" onclick="mostrarSelect()"> Pós-Graduação
+                                <input type="radio" name="modalidade" value="PosGraduacao" required onclick="mostrarSelect()"> Pós-Graduação
                             </label>
                             <label>
-                                <input type="radio" name="modalidade" value="Especializacao" onclick="mostrarSelect()"> Especialização                                </label>
+                                <input type="radio" name="modalidade" value="Especializacao" required onclick="mostrarSelect()"> Especialização                                </label>
                         </div>
                     </div>
                     
                     <div id="selectGraduacao" style="display:none;">
                         <label for="cursoGraduacao">Escolha o curso de graduação:</label>
-                        <select id="cursoGraduacao" name="cursoGraduacao" onchange="validarSelecoes();">
+                        <select id="cursoGraduacao" name="curso" onchange="atualizarCampus();">
                             <option value="">(Selecione)</option>
                             <optgroup label="Campus Alvorada"></optgroup>
                             <option value="Licenciatura em Pedagogia">Licenciatura em Pedagogia</option>
@@ -333,7 +349,7 @@
                     
                     <div id="selectPosGraduacao" style="display:none;">
                         <label for="cursoPosGraduacao">Escolha o curso de pós-graduação:</label>
-                        <select id="cursoPosGraduacao" name="cursoPosGraduacao" onchange="validarSelecoes();">
+                        <select id="cursoPosGraduacao" name="curso" onchange="atualizarCampus();">
                             <option value="">(Selecione)</option>
                             <optgroup label="Campus Alvorada"></optgroup>
                             <optgroup label="Campus Bento Gonçalves">
@@ -372,7 +388,7 @@
                     
                     <div id="selectEspecializacao" style="display:none;">
                         <label for="cursoEspecializacao">Escolha o curso de especialização:</label>
-                        <select id="cursoEspecializacao" name="cursoEspecializacao" onchange="validarSelecoes();">
+                        <select id="cursoEspecializacao" name="curso" onchange="atualizarCampus();">
                             <option value="">(Selecione)</option>
                             <optgroup label="Campus Alvorada"></optgroup>
                             <option value="Especialização em Saúde Coletiva">Especialização em Saúde Coletiva</option>
@@ -428,11 +444,12 @@
                                 <option value="Especialização em Agroecologia">Especialização em Agroecologia</option>
                             </optgroup>
                         </select>
-                    </div>                 
-                <div class="botoes">
-                    <input id="ienviar" type="submit" value="Enviar">
-                    <input id="ilimpar" type="reset" value="Limpar">
-                </div> 
+                    </div>
+                    <input type="hidden" id="campus" name="campus">                 
+                    <div class="botoes">
+                        <input id="ienviar" type="submit" value="Enviar">
+                        <input id="ilimpar" type="reset" value="Limpar">
+                    </div>
                 </form>
             </div>
         </main>
