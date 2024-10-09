@@ -2,20 +2,19 @@
 require_once 'fpdf186/fpdf.php';
 
 // Recebendo os dados do formulário
-$tituloTrabalho = $_POST['tituloTrabalho'] ?? '';
-$numeroFolhas = $_POST['numeroFolhas'] ?? '';
-$nomeAutor = $_POST['nomeAutor'] ?? '';
-$sobrenomeAutor = $_POST['sobrenomeAutor'] ?? '';
-$nomeOrientador = $_POST['nomeOrientador'] ?? '';
-$sobrenomeOrientador = $_POST['sobrenomeOrientador'] ?? '';
-$ano = $_POST['ano'] ?? '';
-$modalidade = $_POST['modalidade'] ?? '';
+$tituloTrabalho = $_POST['tituloTrabalho'];
+$numeroFolhas = $_POST['numeroFolhas'];
+$nomeAutor = $_POST['nomeAutor'];
+$sobrenomeAutor = $_POST['sobrenomeAutor'];
+$nomeOrientador = $_POST['nomeOrientador'];
+$sobrenomeOrientador = $_POST['sobrenomeOrientador'];
+$ano = $_POST['ano'];
+$modalidade = $_POST['modalidade'];
 $cursos = isset($_POST['curso']) ? $_POST['curso'] : '';
 $campus = isset($_POST['campus']) ? $_POST['campus'] : '';
 $cidade = 'Feliz';
 $tipoOrientador = isset($_POST['orientadora']) ? 'Orientadora' : 'Orientador';
 $coorientadores = [];
-
 for ($i = 1; $i <= 5; $i++) {
     if (isset($_POST["nomeCoorientador$i"])) {
         $nomeCoorientador = $_POST["nomeCoorientador$i"];
@@ -32,19 +31,12 @@ for ($i = 1; $i <= 5; $i++) {
 $pdf = new FPDF("P");
 $pdf->AddPage();
 
-// Configurações do arquivo PDF
 $arquivo = "Ficha_Catalografica_".$nomeAutor."_".$sobrenomeAutor.".pdf";
-$pdf->SetFont('Arial', '', 12);
 
-// Mensagem centralizada
-$pdf->Cell(0, 10, "Ficha catalográfica gerada por meio de sistema automatizado gerenciado pelo IFRS.", 0, 1, 'C');
-$pdf->Cell(0, 10, "Dados inseridos pelo próprio autor.", 0, 1, 'C');
-$pdf->Ln(10); // Adiciona um espaço em branco
+$pdf->SetFont('Arial', '', 12);
 
 // Formatação da ficha catalográfica
-$pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(0, 10, utf8_decode("$sobrenomeAutor, $nomeAutor"), 0, 1);
-$pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, utf8_decode("$tituloTrabalho / $nomeAutor $sobrenomeAutor. -- $ano."), 0, 1);
 $pdf->Cell(0, 10, utf8_decode("$numeroFolhas f."), 0, 1);
 $pdf->Cell(0, 10, utf8_decode("$tipoOrientador: $nomeOrientador $sobrenomeOrientador."), 0, 1);
@@ -56,9 +48,8 @@ foreach ($coorientadores as $coorientador) {
 
 // Informação sobre o Instituto
 $pdf->Cell(0, 10, utf8_decode("$modalidade -- Instituto Federal de Educação, Ciência e Tecnologia - $campus, modalidade em $cursos, $cidade, BR-RS, $ano."), 0, 1);
-$pdf->Ln(5); // Adiciona um espaço em branco
 
-// Inicializa o array de assuntos
+// Adicionando os assuntos ao PDF
 $assuntos = [];
 for ($i = 1; isset($_POST["assunto$i"]); $i++) {
     $assuntos[] = $_POST["assunto$i"];
@@ -68,8 +59,6 @@ foreach ($assuntos as $index => $assunto) {
     $numeroAssunto = $index + 1; // Para começar a contagem em 1
     $pdf->Cell(0, 10, utf8_decode("$numeroAssunto. $assunto."), 0, 1);
 }
-
-$pdf->Ln(5); // Adiciona um espaço em branco
 
 // Coletando orientadores e coorientadores
 $referencias = [];
