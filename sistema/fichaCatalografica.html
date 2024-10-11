@@ -40,8 +40,9 @@
                                     placeholder="Informe o nome completo sem o último sobrenome:"
                                     required
                                     oninput="aplicarTitleize('inomeAutor')"
-                                    oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
+                                    oninvalid="setCustomValidity('Preencha este campo! Apenas letras e espaços são permitidos.')"
                                     oninput="setCustomValidity('')"
+                                    autocomplete="off"
                                 >
                             </div>
                             <div class="sobrenome">
@@ -56,52 +57,51 @@
                                     oninput="aplicarTitleize('isobrenomeAutor')"
                                     oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
                                     oninput="setCustomValidity('')"
+                                    autocomplete="off"
                                 >
                             </div>
                         </div>
                     </div>
                     <div class="orientador">
                         <h2>Orientador</h2>
+                        <div class="nome_sobrenome">
+                            <div class="nome">
+                                <input 
+                                    id="inomeOrientador" 
+                                    type="text" 
+                                    name="nomeOrientador"
+                                    pattern="[A-Za-zÀ-ÿ\s]+" 
+                                    title="Informe o nome completo sem o último sobrenome do orientador." 
+                                    placeholder="Nome completo sem o último sobrenome:"
+                                    required
+                                    oninput="aplicarTitleize('inomeOrientador')"
+                                    oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
+                                    oninput="setCustomValidity('')"
+                                    autocomplete="off"
+                                >
+                            </div>
+                            <div class="sobrenome">
+                                <input 
+                                    id="isobrenomeOrientador" 
+                                    type="text" 
+                                    name="sobrenomeOrientador"
+                                    pattern="[A-Za-zÀ-ÿ\s]+" 
+                                    title="Informe o último sobrenome do orientador."
+                                    placeholder="Último sobrenome:"
+                                    required
+                                    oninput="aplicarTitleize('isobrenomeOrientador')"
+                                    oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
+                                    oninput="setCustomValidity('')"
+                                    autocomplete="off"
+                                >
+                            </div>
+                        <div class="checkbox-wrapper-34">
+                            <input id="iorientadora" class="tgl tgl-ios" type="checkbox" name="orientadora" title="Orientadora">
+                            <label class="tgl-btn" for="iorientadora"></label>
+                        </div>
+                        <label for="iorientadora">Orientadora</label>
                     </div>
-                    <div class="nome_sobrenome">
-                        <div class="nome">
-                            <input 
-                                id="inomeOrientador" 
-                                type="text" 
-                                name="nomeOrientador"
-                                pattern="[A-Za-zÀ-ÿ\s]+" 
-                                title="Informe o nome completo sem o último sobrenome do orientador." 
-                                placeholder="Nome completo sem o último sobrenome:"
-                                required
-                                oninput="aplicarTitleize('inomeOrientador')"
-                                oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
-                                oninput="setCustomValidity('')"
-                            >
-                        </div>
-                        <div class="sobrenome">
-                            <input 
-                                id="isobrenomeOrientador" 
-                                type="text" 
-                                name="sobrenomeOrientador"
-                                pattern="[A-Za-zÀ-ÿ\s]+" 
-                                title="Informe o último sobrenome do orientador."
-                                placeholder="Último sobrenome:"
-                                required
-                                oninput="aplicarTitleize('isobrenomeOrientador')"
-                                oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
-                                oninput="setCustomValidity('')"
-                            >
-                        </div>
-                        <div class="checkbox-label">
-                            <input
-                                id="iorientadora"
-                                type="checkbox"
-                                name="orientadora"
-                                title="Orientadora"
-                            >
-                            <label for="iOrientadora">Orientadora</label>
-                        </div>
-                    </div>                            
+                                                
                     <div class="coorientador">
                         <div class="coorientador_coorientadora">
                             <h2>Coorientador</h2>
@@ -123,9 +123,10 @@
                                         title="Informe o nome completo sem o último sobrenome do coorientador."
                                         placeholder="Nome completo sem o último sobrenome:"
                                         required
-                                        oninput="aplicarTitleize('inomeCoorientador')" 
+                                        oninput="aplicarTitleizeElement(this)"
                                         oninvalid="setCustomValidity('Apenas letras e espaços são permitidos.')"
                                         oninput="setCustomValidity('')"
+                                        autocomplete="off"
                                     >
                                 </div>
                                 <div class="sobrenome">
@@ -137,21 +138,18 @@
                                         title="Informe o último sobrenome do coorientador."
                                         placeholder="Último sobrenome:"
                                         required
-                                        oninput="aplicarTitleize('isobrenomeCoorientador')"
+                                        oninput="aplicarTitleizeElement(this)"
+                                        autocomplete="off"
                                     >
                                 </div>
-                                <div class="checkbox-label">
-                                    <input
-                                        id="icoCoorientadora"
-                                        type="checkbox"
-                                        name="coorientadora"
-                                        title="Coorientadora"
-                                    >
-                                    <label for="icoCoorientadora">Coorientadora</label>
+                                <div class="checkbox-wrapper-34">
+                                    <input id="icoCoorientadora" class="tgl tgl-ios" type="checkbox" name="coorientadora" title="Coorientadora">
+                                    <label class="tgl-btn" for="icoCoorientadora"></label>
                                 </div>
+                                <label for="icoCoorientadora">Coorientadora</label>
                             </div>
                         </div>
-                    </div>
+                    </div>                        
                     <div class="titulo">
                         <h2>Título</h2>
                         <input 
@@ -161,6 +159,7 @@
                         placeholder="Título do Trabalho"
                         title="Informe o título do trabalho."
                         required
+                        autocomplete="off"
                         >
                     </div>
                     
@@ -178,6 +177,7 @@
                                 oninput="validarAno()"
                                 oninvalid="setCustomValidity('Apenas números são permitidos.')"
                                 oninput="setCustomValidity('')"
+                                autocomplete="off"
                             >
                         </div>
                         <div class="numeroFolhas">
@@ -192,6 +192,7 @@
                             required
                             oninvalid="setCustomValidity('Apenas números são permitidos.')"
                             oninput="setCustomValidity('')"
+                            autocomplete="off"
                             >
                         </div>
                         <div class="assunto">
@@ -210,25 +211,24 @@
                                     placeholder="Assunto 1"
                                     title="Informe o assunto."
                                     required
+                                    autocomplete="off"
                                 >
                             </div>
                         </div>
                     </div>
-                        
                     <div class="modalidades">
                         <h2>Tipo do Trabalho</h2>
                         <div class="opcaoModalidade">
-                            <label>
-                                <input type="radio" name="modalidade" value="Graduacao" required onclick="mostrarSelect()"> Graduação
-                            </label>
-                            <label>
-                                <input type="radio" name="modalidade" value="PosGraduacao" required onclick="mostrarSelect()"> Pós-Graduação
-                            </label>
-                            <label>
-                                <input type="radio" name="modalidade" value="Especializacao" required onclick="mostrarSelect()"> Especialização                                </label>
+                            <input type="radio" id="graduacao" name="modalidade" value="Graduacao" required onclick="mostrarSelect()">
+                            <label for="graduacao">Graduação</label>
+                    
+                            <input type="radio" id="posGraduacao" name="modalidade" value="PosGraduacao" required onclick="mostrarSelect()">
+                            <label for="posGraduacao">Pós-Graduação</label>
+                    
+                            <input type="radio" id="especializacao" name="modalidade" value="Especializacao" required onclick="mostrarSelect()">
+                            <label for="especializacao">Especialização</label>
                         </div>
                     </div>
-                    
                     <div id="selectGraduacao" style="display:none;">
                         <label for="cursoGraduacao">Escolha o curso de graduação:</label>
                         <select id="cursoGraduacao" name="curso" onchange="atualizarCampus();">

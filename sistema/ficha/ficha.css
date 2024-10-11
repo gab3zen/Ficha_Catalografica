@@ -3,80 +3,136 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #a3b18a;
+    background-image: url('https://memoria.ifrs.edu.br/wp-content/uploads/sites/4/2019/07/IFRS-Feliz.jpg'); /* Imagem de fundo */
+    background-size: cover; /* Faz a imagem cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Não repete a imagem */
 }
+
 .container {
     width: 60%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.4); /* Fundo semi-transparente */
     border-radius: 7px;
     margin-bottom: 15px;
     margin-top: 15px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); /* Efeito de desfoque */
 }
+
 .cabecalho {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 5px;
-    background-color: #ffffff;
 }
+
 .cabecalho .imagem {
     margin-right: 20px;
 }
+
 .cabecalho img {
     width: 100px;
     height: auto;
 }
+
 .cabecalho .link {
     display: flex;
     flex-direction: column;
 }
+
 .cabecalho .link a {
     text-decoration: none;
     color: #000;
     font-size: 14px;
 }
+
 .cabecalho .link a:hover {
     text-decoration: underline;
 }
+
 h1 {
     font-size: 24px;
     text-align: center;
     margin-bottom: 20px;
 }
+
 h2 {
     font-size: 16px;
-    color: #333;
+    color: #1c0b49;
     margin-bottom: 5px;
 }
+
 input[type="text"], select {
     width: calc(100% - 10px);
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #000000;
     border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    border: none; /* Removendo a borda para um efeito mais suave */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 input[type="text"]:focus, select:focus {
-    border-color: #009623;
+    border: none; /* Removendo a borda para um efeito mais suave */
+    box-shadow: 0px 2px 10px rgba(0, 27, 150, 0.2);
     outline: none;
 }
+
 select {
-    width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    border: none; /* Removendo a borda para um efeito mais suave */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 footer {
     margin-top: 30px;
     text-align: center;
     color: #777;
 }
+
+input {
+    padding: 8px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    border: none; /* Removendo a borda para um efeito mais suave */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input::placeholder{
+    color: #000000;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #001b96;
+    box-shadow: 0px 2px 10px rgba(0, 27, 150, 0.2); /* Sombra mais intensa no foco */
+    outline: none;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Box-shadow mais suave */
+}
+
+footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #777;
+}
+
 input {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Box-shadow mais suave */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Borda leve */
 }
 
 .titulo_numeroFolhas {
@@ -96,32 +152,44 @@ input {
 .titulo input, .numeroFolhas input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #000;
     border-radius: 10px;
     box-sizing: border-box;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Box-shadow mais suave */
 }
 
 .nome_sobrenome {
     display: flex;
     justify-content: space-between;
     gap: 10px;
+    align-items: center; /* Alinha verticalmente todos os elementos no centro */
 }
 
 .nome_sobrenome input {
-    width: 100%;
+    flex: 1; /* Faz com que os inputs ocupem o mesmo espaço disponível */
     padding: 10px;
-    border: 1px solid #000;
-    border-radius: 10px;
-    box-sizing: border-box;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Box-shadow mais suave */
 }
 
-.nome_sobrenome .nome {
-    flex: 50%; 
-}
-
+.nome_sobrenome .nome,
 .nome_sobrenome .sobrenome {
-    flex: 50%; 
+    flex: 1; /* Faz com que os containers dos inputs ocupem o mesmo espaço */
 }
+
+.nome_sobrenome .nome input,
+.nome_sobrenome .sobrenome input {
+    width: 100%; /* Garante que os inputs ocupem toda a largura do container */
+}
+
+input[type="text"], select {
+    width: 100%; /* Garante que todos os inputs ocupem a largura total do seu container */
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    border: none; /* Removendo a borda para um efeito mais suave */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .ano_assunto {
     display: flex;
     justify-content: space-between;
@@ -136,58 +204,37 @@ input {
     flex: 15%;
 }
 
-.ano_assunto .numeroFolhas{
-    flex:15%;
+.ano_assunto .numeroFolhas {
+    flex: 15%;
 }
 
-#ibotaoAdicionarAssunto, #ibotaoAdicionarCoorientador{
+#ibotaoAdicionarAssunto, #ibotaoAdicionarCoorientador {
     border: none;
     border-radius: 100%;
     background-color: rgb(0, 207, 59);
     color: #ffffff;
     height: 23px;
     width: 23px;
-    marging-left: 3px;
+    margin-left: 3px;
 }
 
-#ibotaoRemoverAssunto, #ibotaoRemoverCoorientador{
+#ibotaoRemoverAssunto, #ibotaoRemoverCoorientador {
     border: none;
     border-radius: 100%;
     background-color: rgb(207, 0, 0);
     color: #ffffff;
     height: 23px;
     width: 23px;
-    marging-left: 3px;
+    margin-left: 3px;
 }
 
 .ano_assunto input {
     width: 100%; 
     padding: 10px;
-    border: 1px solid #000;
     border-radius: 10px;
     box-sizing: border-box;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Box-shadow mais suave */
 }
-
-.modalidades {
-    margin-bottom: 20px; 
-}
-
-.opcaoModalidade {
-    display: flex;
-    justify-content: center;
-    gap: 25%;
-}
-
-.opcaoModalidade label {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-.opcaoModalidade input[type="radio"]:checked + span {
-    border-color: #035516;
-}
-
 
 .botoes {
     display: flex;
@@ -204,12 +251,12 @@ input {
     color: white;
 }
 
-.botoes input[type="submit"]{
-    background-color: #035516;
+.botoes input[type="submit"] {
+    background-color: #1f4775;
 }
 
 .botoes input[type="reset"] {
-    background-color: #dc3545; 
+    background-color: #7e0e19; 
 }
 
 .botoes input[type="submit"]:hover,
@@ -228,12 +275,102 @@ input {
     align-items: center; /* Alinhar verticalmente a checkbox e o texto */
 }
 
-.checkbox-label label {
+.checkbox-label {
     margin-left: 5px; /* Espaço entre a checkbox e o texto */
-    font-size: 9;
 }
 
-#iorientadora{
+#iorientadora {
     margin-left: 20px;
 }
 
+.checkbox-wrapper-34 {
+    --blue: #02488e;
+    --g08: #acacac;
+    --g04: #cacbce;
+    display: flex; /* Alinhar checkbox e label horizontalmente */
+    align-items: center; /* Centraliza verticalmente a checkbox e a label */
+    gap: 10px; /* Espaço entre a checkbox e a label */
+}
+
+.checkbox-wrapper-34 .tgl {
+    display: none;
+}
+
+.checkbox-wrapper-34 .tgl + .tgl-btn {
+    outline: 0;
+    display: block;
+    width: 25px;
+    height: 12px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    background: var(--g08);
+    border-radius: 20rem;
+    padding: 3px;
+    transition: all 0.4s ease;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.checkbox-wrapper-34 .tgl + .tgl-btn:after {
+    content: "";
+    border-radius: 2em;
+    background: #ffffff;
+    width: 50%;
+    height: 100%;
+    position: relative;
+    display: block;
+    left: 0;
+    transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.checkbox-wrapper-34 .tgl-ios:checked + .tgl-btn {
+    background: var(--blue);
+}
+
+.checkbox-wrapper-34 .tgl-ios:checked + .tgl-btn:after {
+    left: 50%;
+}
+
+.modalidades {
+    margin-bottom: 20px; 
+    display: flex; /* Usar flexbox para alinhar os itens */
+    flex-direction: column; /* Coloca os itens em coluna */
+}
+
+.modalidades h2 {
+    margin-bottom: 10px; /* Espaçamento abaixo do título */
+    text-align: left; /* Alinha o título à esquerda */
+}
+
+.opcaoModalidade {
+    display: flex; /* Usar flexbox para alinhar as opções */
+    justify-content: space-between; /* Distribui os espaços entre as opções */
+    gap: 10px; /* Espaço entre as opções */
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha, se necessário */
+}
+
+.opcaoModalidade input[type="radio"] {
+    display: none; /* Esconde os inputs radio */
+}
+
+.opcaoModalidade label {
+    flex: 1; /* Faz com que cada label ocupe o espaço disponível */
+    padding: 10px 20px; /* Espaço interno nas labels */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Borda leve */
+    border-radius: 10px; /* Bordas arredondadas */
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    transition: background-color 0.3s, border-color 0.3s; /* Efeitos de transição */
+}
+
+/* Estilo ao selecionar */
+/* Estilo ao selecionar */
+.opcaoModalidade input[type="radio"]:checked + label {
+    background-color: #030d559b; /* Cor de fundo quando selecionado */
+    color: #fff; /* Cor do texto quando selecionado */
+}
+
+/* Efeito de hover */
+.opcaoModalidade label:hover {
+    background-color: rgba(3, 32, 146, 0.3); /* Efeito de hover */
+}

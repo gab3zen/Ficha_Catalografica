@@ -33,7 +33,6 @@ function aplicarTitleizeElement(element) {
 
 let contadorCoorientador = 1;
 
-// Função para adicionar coorientador
 function adicionarCoorientador() {
     if (contadorCoorientador < 5) {
         contadorCoorientador++;
@@ -49,6 +48,7 @@ function adicionarCoorientador() {
         inputNome.name = 'nomeCoorientador' + contadorCoorientador;
         inputNome.placeholder = 'Nome completo sem o último sobrenome:';
         inputNome.required = true;
+        inputNome.autocomplete = 'off';
         inputNome.oninput = function() {
             aplicarTitleizeElement(inputNome); // Aplica titleize diretamente ao campo
         };
@@ -62,25 +62,53 @@ function adicionarCoorientador() {
         inputSobrenome.name = 'sobrenomeCoorientador' + contadorCoorientador;
         inputSobrenome.placeholder = 'Último sobrenome:';
         inputSobrenome.required = true;
+        inputSobrenome.autocomplete = 'off';
         inputSobrenome.oninput = function() {
             aplicarTitleizeElement(inputSobrenome); // Aplica titleize diretamente ao campo
         };
         novoCoorientadorSobrenome.appendChild(inputSobrenome);
 
-        // Adiciona os campos de nome e sobrenome ao container
+        // Cria o checkbox com o estilo personalizado
+        const checkboxWrapper = document.createElement('div');
+        checkboxWrapper.className = 'checkbox-wrapper-34';
+
+        const inputCheckbox = document.createElement('input');
+        inputCheckbox.type = 'checkbox';
+        inputCheckbox.className = 'tgl tgl-ios'; // Classe para aplicar o estilo
+        inputCheckbox.id = 'icoCoorientadora' + contadorCoorientador;
+        inputCheckbox.name = 'coorientadora' + contadorCoorientador;
+        inputCheckbox.title = 'Coorientadora';
+
+        const labelCheckboxBtn = document.createElement('label');
+        labelCheckboxBtn.className = 'tgl-btn';
+        labelCheckboxBtn.setAttribute('for', inputCheckbox.id);
+
+        const labelCheckboxText = document.createElement('label');
+        labelCheckboxText.setAttribute('for', inputCheckbox.id);
+        labelCheckboxText.textContent = 'Coorientadora';
+
+        // Adiciona o checkbox e o label ao container
+        checkboxWrapper.appendChild(inputCheckbox);
+        checkboxWrapper.appendChild(labelCheckboxBtn);
+        checkboxWrapper.appendChild(labelCheckboxText);
+
+        // Adiciona os campos de nome, sobrenome e checkbox ao container
         novoContainer.appendChild(novoCoorientadorNome);
         novoContainer.appendChild(novoCoorientadorSobrenome);
+        novoContainer.appendChild(checkboxWrapper);
 
         // Adiciona o novo container ao div principal de coorientadores
         const divCoorientador = document.getElementById('divCoorientador');
         divCoorientador.appendChild(novoContainer);
 
-        // Controla a exibição dos botões adicionar/remover
-        if (contadorCoorientador === 5) {
-            document.getElementById('ibotaoAdicionarCoorientador').style.display = 'none';
-        }
+        // Exibe o botão "Remover" caso mais de 1 coorientador exista
         if (contadorCoorientador > 1) {
             document.getElementById('ibotaoRemoverCoorientador').style.display = 'inline';
+        }
+
+        // Esconde o botão "Adicionar" se o limite de 5 coorientadores for atingido
+        if (contadorCoorientador >= 5) {
+            document.getElementById('ibotaoAdicionarCoorientador').style.display = 'none';
         }
     }
 }
@@ -106,6 +134,7 @@ function removerCoorientador() {
     }
 }
 
+
 function validarAno() {
     const inputAno = document.getElementById('iano');
     const anoAtual = new Date().getFullYear();
@@ -128,6 +157,7 @@ function adicionarAssunto() {
         novoAssunto.name = 'assunto' + contadorAssuntos;
         novoAssunto.placeholder = 'Assunto ' + contadorAssuntos;
         novoAssunto.required = true;
+        novoAssunto.autocomplete = 'off';
 
         // Adiciona o novo input ao contêiner de assuntos
         const divAssuntos = document.getElementById('divAssuntos');
