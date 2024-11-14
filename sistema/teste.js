@@ -1,36 +1,3 @@
-function titleize(text) {
-    // Lista de palavras que não devem ser capitalizadas
-    const exceptions = ["de", "da", "dos", "das", "do", "e"];
-    
-    var loweredText = text.toLowerCase();
-    var words = loweredText.split(" ");
-
-    for (var a = 0; a < words.length; a++) {
-        var w = words[a];
-
-        // Capitaliza a palavra se não estiver na lista de exceções ou se for a primeira palavra
-        if (exceptions.indexOf(w) === -1 || a === 0) {
-            var firstLetter = w.charAt(0);
-            w = firstLetter.toUpperCase() + w.slice(1);
-        }
-
-        words[a] = w;
-    }
-
-    return words.join(" ");
-}
-
-// Função para aplicar titleize a um campo de input
-function aplicarTitleize(inputId) {
-    const input = document.getElementById(inputId);
-    input.value = titleize(input.value);
-}
-
-// Função genérica para aplicar titleize diretamente ao valor do input
-function aplicarTitleizeElement(element) {
-    element.value = titleize(element.value);
-}
-
 let contadorCoorientador = 1;
 
 function adicionarCoorientador() {
@@ -48,7 +15,6 @@ function adicionarCoorientador() {
         inputNome.name = 'nomeCoorientador' + contadorCoorientador;
         inputNome.placeholder = 'Nome completo sem o último sobrenome:';
         inputNome.required = true;
-        inputNome.autocomplete = 'off';
         inputNome.oninput = function() {
             aplicarTitleizeElement(inputNome); // Aplica titleize diretamente ao campo
         };
@@ -62,7 +28,6 @@ function adicionarCoorientador() {
         inputSobrenome.name = 'sobrenomeCoorientador' + contadorCoorientador;
         inputSobrenome.placeholder = 'Último sobrenome:';
         inputSobrenome.required = true;
-        inputSobrenome.autocomplete = 'off';
         inputSobrenome.oninput = function() {
             aplicarTitleizeElement(inputSobrenome); // Aplica titleize diretamente ao campo
         };
@@ -134,18 +99,7 @@ function removerCoorientador() {
     }
 }
 
-
-function validarAno() {
-    const inputAno = document.getElementById('iano');
-    const anoAtual = new Date().getFullYear();
-    const anoInserido = parseInt(inputAno.value, 10);
-
-    if (anoInserido > anoAtual) {
-        inputAno.value = anoAtual;
-        SVGSwitchElement.error(`O ano não pode ser maior que ${anoAtual}. O valor foi ajustado para o ano atual.`);
-    }
-}
-let contadorAssuntos = 1; // Inicia com 1 porque já existe um campo de assunto
+let contadorAssuntos = 1; // Inicializa o contador de assuntos
 
 function adicionarAssunto() {
     if (contadorAssuntos < 5) {
@@ -157,10 +111,9 @@ function adicionarAssunto() {
         novoAssunto.name = 'assunto' + contadorAssuntos;
         novoAssunto.placeholder = 'Assunto ' + contadorAssuntos;
         novoAssunto.required = true;
-        novoAssunto.autocomplete = 'off';
 
         // Adiciona o novo input ao contêiner de assuntos
-        const divAssuntos = document.getElementById('divAssuntos');
+        const divAssuntos = document.getElementById('assuntosContainer');
         divAssuntos.appendChild(novoAssunto);
 
         // Se o contador for igual a 5, esconde o botão
@@ -175,7 +128,7 @@ function adicionarAssunto() {
 
 function removerAssunto() {
     if (contadorAssuntos > 1) {
-        const divAssuntos = document.getElementById('divAssuntos');
+        const divAssuntos = document.getElementById('assuntosContainer');
         
         // Remove o último input de assunto adicionado
         divAssuntos.removeChild(divAssuntos.lastChild);
@@ -195,12 +148,15 @@ function removerAssunto() {
 }
 
 function mostrarSelect() {
-    // Oculta todos os selects de início
-    document.getElementById("selectGraduacao").style.display = "none";
-    document.getElementById("selectPosGraduacao").style.display = "none";
-    document.getElementById("selectEspecializacao").style.display = "none";
+    // Oculta todos os selects e remove o atributo 'required' de todos eles
+    const selects = ["selectGraduacao", "selectPosGraduacao", "selectEspecializacao"];
+    selects.forEach(selectId => {
+        const selectElement = document.getElementById(selectId);
+        selectElement.style.display = "none";
+        selectElement.querySelector("select").removeAttribute("required");
+    });
     
-    // Verifica qual radio está selecionado e exibe o select correspondente
+    // Verifica qual radio está selecionado e exibe o select correspondente, adicionando o 'required' apenas a ele
     const modalidadeSelecionada = document.querySelector('input[name="modalidade"]:checked');
 
     if (modalidadeSelecionada) {
@@ -208,60 +164,16 @@ function mostrarSelect() {
         
         if (valorSelecionado === "Graduacao") {
             document.getElementById("selectGraduacao").style.display = "block";
+            document.getElementById("cursoGraduacao").setAttribute("required", "required");
         } else if (valorSelecionado === "PosGraduacao") {
             document.getElementById("selectPosGraduacao").style.display = "block";
+            document.getElementById("cursoPosGraduacao").setAttribute("required", "required");
         } else if (valorSelecionado === "Especializacao") {
             document.getElementById("selectEspecializacao").style.display = "block";
+            document.getElementById("cursoEspecializacao").setAttribute("required", "required");
         }
     }
 }
-function validarSelecoes() {
-    const modalidade = document.querySelector('input[name="modalidade"]:checked');
 
-    if (!modalidade) {
-        alert("Por favor, selecione uma modalidade.");
-        return false;
-    }
+mostrarSelect();
 
-    let select = null;
-    let cursoSelecionado = '';
-
-    if (modalidade.value === 'Graduacao') {
-        select = document.getElementById('cursoGraduacao');
-        cursoSelecionado = 'cursoGraduacao';
-    } else if (modalidade.value === 'PosGraduacao') {
-        select = document.getElementById('cursoPosGraduacao');
-        cursoSelecionado = 'cursoPosGraduacao';
-    } else if (modalidade.value === 'Especializacao') {
-        select = document.getElementById('cursoEspecializacao');
-        cursoSelecionado = 'cursoEspecializacao';
-    }
-
-    if (select && select.value === "") {
-        alert("Por favor, selecione um curso.");
-        select.focus();
-        return false;
-    }
-
-    // Se um curso foi selecionado, atualiza o campus
-    atualizarCampus(cursoSelecionado);
-
-    return true; // Se todas as validações passaram
-}
-
-function atualizarCampus(cursoSelecionado) {
-    let selectCurso = document.getElementById(cursoSelecionado);
-    if (selectCurso && selectCurso.selectedIndex >= 0) {
-        const optgroupLabel = selectCurso.options[selectCurso.selectedIndex].parentElement.label;
-        document.getElementById("campus").value = optgroupLabel;
-
-        // Debug: Verifica se o valor foi atualizado
-        console.log("Campus atualizado:", optgroupLabel);
-    } else {
-        console.log("Nenhum curso selecionado");
-    }
-}
-
-console.log("Modalidade:", modalidade.value);
-console.log("Curso selecionado:", select.value);
-console.log("Campus atualizado:", document.getElementById("campus").value);

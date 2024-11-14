@@ -3,10 +3,12 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-image: url('https://memoria.ifrs.edu.br/wp-content/uploads/sites/4/2019/07/IFRS-Feliz.jpg'); /* Imagem de fundo */
+    background-image: url('imagemlivro.png'); /* Imagem de fundo */
+    background-color: #121212;
     background-size: cover; /* Faz a imagem cobrir todo o fundo */
     background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat; /* Não repete a imagem */
+    background-repeat: no-repeat; /* Não repete a imagem*/
+    background-attachment: fixed; /* Faz a imagem de fundo permanecer fixa ao rolar */
 }
 
 .container {
@@ -60,7 +62,7 @@ h1 {
 
 h2 {
     font-size: 16px;
-    color: #1c0b49;
+    color: #04000f;
     margin-bottom: 5px;
 }
 
@@ -69,7 +71,7 @@ input[type="text"], select {
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    background-color: rgba(255, 255, 255, 0.6); /* Fundo semi-transparente */
     border: none; /* Removendo a borda para um efeito mais suave */
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -84,7 +86,7 @@ select {
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    background-color: rgba(255, 255, 255, 0.6); /* Fundo semi-transparente */
     border: none; /* Removendo a borda para um efeito mais suave */
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -98,7 +100,7 @@ footer {
 input {
     padding: 8px;
     box-sizing: border-box;
-    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    background-color: rgba(255, 255, 255, 0.6); /* Fundo semi-transparente */
     border: none; /* Removendo a borda para um efeito mais suave */
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -185,7 +187,7 @@ input[type="text"], select {
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    background-color: rgba(255, 255, 255, 0.6); /* Fundo semi-transparente */
     border: none; /* Removendo a borda para um efeito mais suave */
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -211,10 +213,10 @@ input[type="text"], select {
 #ibotaoAdicionarAssunto, #ibotaoAdicionarCoorientador {
     border: none;
     border-radius: 100%;
-    background-color: rgb(0, 207, 59);
+    background-color: rgb(1, 135, 39);
     color: #ffffff;
-    height: 23px;
-    width: 23px;
+    height: 25px; /* Ajuste de altura */
+    width: 25px;  /* Ajuste de largura */
     margin-left: 3px;
 }
 
@@ -223,9 +225,21 @@ input[type="text"], select {
     border-radius: 100%;
     background-color: rgb(207, 0, 0);
     color: #ffffff;
-    height: 23px;
-    width: 23px;
+    height: 25px; /* Ajuste de altura */
+    width: 25px;  /* Ajuste de largura */
     margin-left: 3px;
+}
+
+#ibotaoAdicionarCoorientador img,
+#ibotaoRemoverCoorientador img,
+#ibotaoAdicionarAssunto img,
+#ibotaoRemoverAssunto img {
+    width: 10px; /* Ajuste de largura do ícone */
+    height: 10px; /* Ajuste de altura do ícone */
+}
+
+#botaoAdicionarAssunto, #botaoRemoverAssunto {
+    margin: 20px;
 }
 
 .ano_assunto input {
@@ -256,7 +270,7 @@ input[type="text"], select {
 }
 
 .botoes input[type="reset"] {
-    background-color: #7e0e19; 
+    background-color: rgb(207, 0, 0); 
 }
 
 .botoes input[type="submit"]:hover,
@@ -264,7 +278,7 @@ input[type="text"], select {
     opacity: 0.8;
 }
 
-.orientador_orientadora, .coorientador_coorientadora {
+.orientador_orientadora, .nomeMaisMenos{
     display: flex; /* Usar flexbox para alinhar elementos em linha */
     align-items: center; /* Alinhar os elementos verticalmente ao centro */
     gap: 10px; /* Espaço entre o título e a checkbox/label */
@@ -359,7 +373,7 @@ input[type="text"], select {
     padding: 10px 20px; /* Espaço interno nas labels */
     border: 1px solid rgba(0, 0, 0, 0.1); /* Borda leve */
     border-radius: 10px; /* Bordas arredondadas */
-    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    background-color: rgba(255, 255, 255, 0.6); /* Fundo semi-transparente */
     transition: background-color 0.3s, border-color 0.3s; /* Efeitos de transição */
 }
 
