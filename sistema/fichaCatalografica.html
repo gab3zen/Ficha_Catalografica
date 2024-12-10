@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Gerador de Ficha Catalográfica</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="teste.js"></script>
+    <script src="ficha/ficha.js"></script>
     <link rel="stylesheet" href="ficha/ficha.css"/>
 </head>
 <body>
@@ -20,22 +20,29 @@
                     <a href="https://ifrs.edu.br/" target="_blank">Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Sul</a>
                     <a href="" target="_blank">Sistema de Bibliotecas do IFRS - SIBIFRS</a>
                 </div>
+                <div class="imagem">
+                    <a href=" " target="_blank">
+                        <img id="logoSIBIFRS" alt="Logo-SIBIFRS" src="ficha/Logo-GRUPO-6-Bibliotecas_Color-horizontal-removebg-preview (1).png" />
+                    </a>
+                </div>
             </div>
         </header>
         <main>
             <div class="formulario">
                 <h1>Dados para Ficha Catalográfica</h1>
-                <form id="formFicha" onsubmit="event.preventDefault(); gerarPDF();">
+                <form id="formFicha" onsubmit="event.preventDefault(); limparEspacos(this); gerarPDF();">
 
         <div class="autor">
-            <h2>Autor</h2>
+            <h2>Autor(a)</h2>
             <div class="nome_sobrenome">
                 <div class="nome">
                     <input 
                         type="text" 
                         id="inomeAutor"
                         pattern="[A-Za-zÀ-ÿ\s']+"
-                        placeholder="Informe o nome completo sem o último sobrenome:" 
+                        title="Informe o nome completo sem o último sobrenome do Autor(a)"
+                        placeholder="Informe o nome completo sem o último sobrenome:"
+                        oninput="aplicarTitleizeElement(this)"
                         required
                     >
                 </div>
@@ -44,7 +51,9 @@
                         type="text" 
                         id="isobrenomeAutor"
                         pattern="[A-Za-zÀ-ÿ\s']+"
-                        placeholder="Informe o último sobrenome:" 
+                        title="Informe o último sobrenome do Autor(a)"
+                        placeholder="Informe o último sobrenome:"
+                        oninput="aplicarTitleizeElement(this)"
                         required
                     >
                 </div>
@@ -52,14 +61,16 @@
         </div>
         
         <div class="orientador">
-            <h2>Orientador</h2>
+            <h2>Orientador(a)</h2>
             <div class="nome_sobrenome">
                 <div class="nome">
                     <input 
                     type="text" 
                     id="inomeOrientador"
                     pattern="[A-Za-zÀ-ÿ\s']+"
-                    placeholder="Informe o nome completo sem o último sobrenome:" 
+                    title="Informe o nome completo sem o último sobrenome do Orientador(a)."
+                    placeholder="Informe o nome completo sem o último sobrenome:"
+                    oninput="aplicarTitleizeElement(this)"
                     required
                     >
                 </div>
@@ -68,7 +79,9 @@
                     type="text"
                     id="isobrenomeOrientador"
                     pattern="[A-Za-zÀ-ÿ\s']+"
+                    title="Informe o último sobrenome do Orientador(a)."
                     placeholder="Informe o último sobrenome:"
+                    oninput="aplicarTitleizeElement(this)"
                     required
                     >
                 </div>
@@ -81,51 +94,15 @@
 
         <div class="coorientador">
             <div class="nomeMaisMenos">
-                <h2>Coorientador</h2>
+                <h2>Coorientador(a/es/as)</h2>
                 <button type="button" id="ibotaoAdicionarCoorientador" onclick="adicionarCoorientador()">
-                    <img src="ficha/sinalMais.png">
+                    <img src="ficha/sinalMais.png" alt="Adicionar">
                 </button>
                 <button type="button" id="ibotaoRemoverCoorientador" style="display: none;" onclick="removerCoorientador()">
-                    <img src="ficha/sinalMenos.png">
+                    <img src="ficha/sinalMenos.png" alt="Remover">
                 </button>
             </div>
-            <div id="divCoorientador">
-                <div class="nome_sobrenome">
-                    <div class="nome">
-                        <input
-                            id="inomeCoorientador"
-                            type="text"
-                            name="nomeCoorientador1"
-                            pattern="[A-Za-zÀ-ÿ\s]+"
-                            title="Informe o nome completo sem o último sobrenome do coorientador."
-                            placeholder="Nome completo sem o último sobrenome:"
-                            required
-                        >
-                    </div>
-                    <div class="sobrenome">
-                        <input
-                            id="isobrenomeCoorientador"
-                            type="text"
-                            name="sobrenomeCoorientador1"
-                            pattern="[A-Za-zÀ-ÿ\s]+"
-                            title="Informe o último sobrenome do coorientador."
-                            placeholder="Último sobrenome:"
-                        >
-                    </div>
-                    <div class="checkbox-wrapper-34">
-                        <input 
-                            id="icoCoorientadora" 
-                            class="tgl tgl-ios" 
-                            type="checkbox" 
-                            name="coorientadora" 
-                            onclick="toggleCoorientador()" 
-                            title="Coorientadora"
-                        >
-                        <label class="tgl-btn" for="icoCoorientadora"></label>
-                    </div>
-                    <label for="icoCoorientadora">Coorientadora</label>
-                </div>
-            </div>
+            <div id="divCoorientador"></div>
         </div>             
 
         <div class="titulo">
@@ -141,7 +118,9 @@
             <div class="ano">
                 <h2>Ano</h2>
                 <input 
-                type="date" 
+                type="number"
+                placeholder="Ex: 2024"
+                min="2024" 
                 id="iano" 
                 required
                 >
@@ -152,7 +131,7 @@
                 type="number" 
                 id="inumeroFolhas"
                 min="1"
-                placeholder="123."
+                placeholder="Ex: 123"
                 required
                 >
             </div>
@@ -170,7 +149,8 @@
                     <input 
                         type="text" 
                         class="assunto" 
-                        placeholder="Assunto"
+                        oninput="aplicarTitleizeElement(this)"
+                        placeholder="Assunto 1"
                         required
                     >
                 </div>
@@ -307,52 +287,54 @@
                             </optgroup>
             </select>
         </div>
-        
+
         <div id="selectPosGraduacao" class="hidden" style="display: none;">
             <label for="cursoPosGraduacao">Escolha o curso de pós-graduação:</label>
             <select id="cursoPosGraduacao" name="cursoPosGraduacao">
                 <option value="">(Selecione)</option>
-                            <optgroup label="Campus Alvorada"></optgroup>
-                            <optgroup label="Campus Bento Gonçalves">
-                                <option value="Mestrado Profissional em Viticultura e Enologia">Mestrado Profissional em Viticultura e Enologia</option>
-                            </optgroup>
-                            <optgroup label="Campus Canoas">
-                                <option value="Mestrado Profissional em Matemática em Rede Nacional  (PROFMAT)">Mestrado Profissional em Matemática em Rede Nacional  (PROFMAT)</option>
-                            </optgroup>
-                            <optgroup label="Campus Caxias do Sul">
-                                <option value="Mestrado Profissional em Tecnologia e Engenharia de Materiais">Mestrado Profissional em Tecnologia e Engenharia de Materiais</option>                                </option>
-                            </optgroup>
-                            <optgroup label="Campus Erechim"></optgroup>
-                            <optgroup label="Campus Farroupilha">
-                                <option value="Mestrado em Educação Básica">Mestrado em Educação Básica</option>
-                                <option value="Mestrado Profissional em Tecnologia e Engenharia dos Materiais">Mestrado Profissional em Tecnologia e Engenharia dos Materiais</option>
-                            </optgroup>
-                            <optgroup label="Campus Feliz">
-                                <option value="Mestrado Profissional em Tecnologia e Engenharia dos Materiais">Mestrado Profissional em Tecnologia e Engenharia dos Materiais</option>
-                            </optgroup>
-                            <optgroup label="Campus Ibirubá"></optgroup>
-                            <optgroup label="Campus Osório"></optgroup>
-                            <optgroup label="Campus Porto Alegre">
-                                <option value="Mestrado Profissional em Informática na Educação">Mestrado Profissional em Informática na Educação</option>
-                                <option value="Mestrado Profissional em Educação Profissional e Tecnológica">Mestrado Profissional em Educação Profissional e Tecnológica</option>
-                                <option value="Mestrado Profissional em Propriedade Intelectual e Transferência de Tecnologia para a Inovação">Mestrado Profissional em Propriedade Intelectual e Transferência de Tecnologia para a Inovação</option>
-                            </optgroup>
-                            <optgroup label="Campus Restinga (Porto Alegre)"></optgroup>
-                            <optgroup label="Campus Rio Grande"></optgroup>
-                            <optgroup label="Campus Rolante"></optgroup>
-                            <optgroup label="Campus Sertão"></optgroup>
-                            <optgroup label="Campus Vacaria"></optgroup>
-                            <optgroup label="Campus Veranópolis"></optgroup>
-                            <optgroup label="Campus Viamão"></optgroup>
+                <optgroup label="Campus Alvorada"></optgroup>
+                <optgroup label="Campus Bento Gonçalves">
+                    <option value="Mestrado Profissional em Viticultura e Enologia">Mestrado Profissional em Viticultura e Enologia</option>
+                </optgroup>
+                <optgroup label="Campus Canoas">
+                    <option value="Mestrado Profissional em Matemática em Rede Nacional -PROFMAT">Mestrado Profissional em Matemática em Rede Nacional -PROFMAT</option>
+                </optgroup>
+                <optgroup label="Campus Caxias do Sul">
+                    <option value="Mestrado Profissional em Tecnologia e Engenharia de Materiais - PPGTEM">Mestrado Profissional em Tecnologia e Engenharia de Materiais - PPGTM</option>
+                </optgroup>
+                <optgroup label="Campus Erechim"></optgroup>
+                <optgroup label="Campus Farroupilha">
+                    <option value="Mestrado em Educação Básica">Mestrado em Educação Básica</option>
+                    <option value="Mestrado Profissional em Tecnologia e Engenharia de Materiais - PPGTEM">Mestrado Profissional em Tecnologia e Engenharia de Materiais - PPGTM</option>
+                </optgroup>
+                <optgroup label="Campus Feliz">
+                    <option value="Mestrado Profissional em Tecnologia e Engenharia de Materiais - PPGTEM">Mestrado Profissional em Tecnologia e Engenharia de Materiais - PPGTM</option>                            
+                </optgroup>
+                <optgroup label="Campus Ibirubá"></optgroup>
+                <optgroup label="Campus Osório"></optgroup>
+                <optgroup label="Campus Porto Alegre">
+                    <option value="Mestrado Profissional em Educação Profissional e Tecnológica - PROFEPT">Mestrado Profissional em Educação Profissional e Tecnológica - PROFEPT</option>
+                </optgroup>
+                <optgroup label="Campus Restinga (Porto Alegre)"></optgroup>
+                <optgroup label="Campus Rio Grande"></optgroup>
+                <optgroup label="Campus Rolante"></optgroup>
+                <optgroup label="Campus Sertão"></optgroup>
+                <optgroup label="Campus Vacaria"></optgroup>    
+                <optgroup label="Campus Veranópolis"></optgroup>
+                <optgroup label="Campus Viamão"></optgroup>
+                            
             </select>
         </div>
 
+            
+        </div>
         <div id="selectEspecializacao" class="hidden" style="display: none;">
             <label for="cursoEspecializacao">Escolha o curso de especialização:</label>
             <select id="cursoEspecializacao" name="cursoEspecializacao">
                 <option value="">(Selecione)</option>
-                            <optgroup label="Campus Alvorada"></optgroup>
-                            <option value="Especialização em Saúde Coletiva">Especialização em Saúde Coletiva</option>
+                            <optgroup label="Campus Alvorada">
+                                <option value="Especialização em Saúde Coletiva">Especialização em Saúde Coletiva</option>
+                            </optgroup>
                             <optgroup label="Campus Bento Gonçalves">
                                 <option value="Especialização em Ensino de Matemática para a Educação Básica">Especialização em Ensino de Matemática para a Educação Básica</option>
                                 <option value="Especialização em Viticultura">Especialização em Viticultura</option>
@@ -432,7 +414,21 @@
     let cidade = '';
     switch (campus) {
         case 'Campus Alvorada': cidade = 'Alvorada'; break;
-        // ... (continua para os demais campi)
+        case 'Campus Bento Gonçalves': cidade = 'Bento Gonçalves'; break;
+        case 'Campus Canoas': cidade = 'Canoas'; break;
+        case 'Campus Caxias do Sul': cidade = 'Caxias do Sul'; break;
+        case 'Campus Erechim': cidade = 'Erechim'; break;
+        case 'Campus Farroupilha': cidade = 'Farroupilha'; break;
+        case 'Campus Feliz': cidade = 'Feliz'; break;
+        case 'Campus Ibirubá': cidade = 'Ibirubá'; break;
+        case 'Campus Porto Alegre': cidade = 'Porto Alegre'; break;
+        case 'Campus Restinga': cidade = 'Porto Alegre'; break;
+        case 'Campus Rio Grande': cidade = 'Rio Grande'; break;
+        case 'Campus Rolante': cidade = 'Rolante'; break;
+        case 'Campus Sertão': cidade = 'Sertão'; break;
+        case 'Campus Vacaria': cidade = 'Vacaria'; break;
+        case 'Campus Veranópolis': cidade = 'Veranópolis'; break;
+        case 'Campus Viamão': cidade = 'Viamão'; break;
         default: cidade = 'Ósorio'; break;
     }
 
@@ -447,7 +443,6 @@
         }
     });
 
-    // Lógica para definir o título dos coorientadores
     let tituloCoorientadores;
     if (coorientadores.length === 1) {
         tituloCoorientadores = coorientadores[0].isCoorientadora ? 'Coorientadora' : 'Coorientador';
@@ -457,15 +452,16 @@
     }
 
     let textoCoorientadores = "";
-    if (coorientadores.length > 0) {
-        textoCoorientadores = `${tituloCoorientadores}: `;
-        coorientadores.forEach((coorientador, index) => {
-            textoCoorientadores += `${coorientador.nome} ${coorientador.sobrenome}`;
-            if (index < coorientadores.length - 1) {
-                textoCoorientadores += ', ';
-            }
-        });
-    }
+if (coorientadores.length > 0) {
+    textoCoorientadores = `${tituloCoorientadores}: `;
+    coorientadores.forEach((coorientador, index) => {
+        textoCoorientadores += `${coorientador.nome} ${coorientador.sobrenome}`;
+        if (index < coorientadores.length - 1) {
+            textoCoorientadores += ', ';
+        }
+    });
+    textoCoorientadores += "."; // Adiciona o ponto somente se houver coorientadores
+}
 
     const assuntos = [];
     document.querySelectorAll('#assuntosContainer input[type="text"]').forEach(assunto => {
@@ -474,11 +470,11 @@
         }
     });
 
-    let modalidadeExibicao = 'Graduação';
+    let modalidadeExibicao = 'Trabalho de Conclusão de Curso (Graduação)';
     if (modalidade === 'posgraduacao') {
-        modalidadeExibicao = 'Pós-Graduação';
+        modalidadeExibicao = 'Dissertação (Mestrado)';
     } else if (modalidade === 'especializacao') {
-        modalidadeExibicao = 'Especialização';
+        modalidadeExibicao = 'Trabalho de Conclusão de Curso (Especialização)';
     }
 
     let tipoOrientador = 'Orientador:';
@@ -495,47 +491,53 @@
         listaAssuntos = listaAssuntos.trim();
     }
 
-    // Função para converter número em algarismo romano
     function numeroRomano(numero) {
         const romanos = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
-        return romanos[numero - 1] || numero.toString(); // Limite de 10, usa números normais após
+        return romanos[numero - 1] || numero.toString();
     }
 
     let indiceRomano = 1;
     let listaOrientadores = '';
-    listaOrientadores += `${numeroRomano(indiceRomano++)}. ${sobrenomeOrientador}, ${nomeOrientador}, orient. `;
 
+    // Adiciona o orientador à listagem
+    listaOrientadores += `${numeroRomano(indiceRomano++)}. ${sobrenomeOrientador}, ${nomeOrientador}. `;
+
+    // Adiciona os coorientadores à listagem
     coorientadores.forEach(coorientador => {
-        const titulo = coorientador.isCoorientadora ? 'coorient.' : 'coorient.';
-        listaOrientadores += `${numeroRomano(indiceRomano++)}. ${coorientador.sobrenome}, ${coorientador.nome}, ${titulo} `;
+        listaOrientadores += `${numeroRomano(indiceRomano++)}. ${coorientador.sobrenome}, ${coorientador.nome}. `;
     });
 
-    const tituloFicticio = `${numeroRomano(indiceRomano)}. Título.`;
+    // Adiciona o "Título" como último item
+    listaOrientadores += `${numeroRomano(indiceRomano++)}. Título.`;
 
-    const textoFinal = `    ${listaAssuntos} ${listaOrientadores} ${tituloFicticio}`;
+    // Garante que o texto completo esteja em uma única linha
+    listaOrientadores = listaOrientadores.trim();
 
-    const larguraRetangulo = 120;
+    const espaco = '    ';
+    const textoFinal = `${espaco}${listaAssuntos} ${listaOrientadores}`;
+
+    const larguraRetangulo = 125;
     const alturaRetangulo = 75;
     const larguraPagina = doc.internal.pageSize.getWidth();
     const alturaPagina = doc.internal.pageSize.getHeight();
     const x = (larguraPagina - larguraRetangulo) / 2;
-    const y = (alturaPagina - alturaRetangulo) / 2;
+    const y = alturaPagina - alturaRetangulo - 30;
 
+    // Adicionar texto CIP antes do retângulo
+    const textoCIP = "CIP - Catalogação na publicação";
+    doc.setFont("Times", "normal"); // Altera a fonte para Times
+    doc.setFontSize(12);
+    doc.text(textoCIP, larguraPagina / 2, y - 10, { align: 'center' });
+
+    // Desenhar o retângulo
     doc.rect(x, y, larguraRetangulo, alturaRetangulo);
-    doc.setFontSize(10);
-    const textoTitulo = "Ficha catalográfica gerada automaticamente.";
-    const textoTitulo2 = "Dados informados pelo usuário.";
-    const textWidth = doc.getTextWidth(textoTitulo);
-    const xText = (larguraPagina - textWidth) / 2;
-    doc.text(textoTitulo, xText, y - 7);
-    doc.text(textoTitulo2, xText + 15, y - 2);
-
     doc.setFont("Courier", "normal");
     doc.setFontSize(9);
+
     const margemEsquerda = 10;
-    const larguraTexto = larguraRetangulo - 15;
+    const larguraTexto = larguraRetangulo - 20;
     const lineSpacing = 3;
-    let linhaAtual = y + 12;
+    let linhaAtual = y + 10;
 
     function adicionarTexto(texto) {
         const linhas = doc.splitTextToSize(texto, larguraTexto);
@@ -550,16 +552,29 @@
     adicionarTexto(`    ${numeroFolhas} f.`);
     adicionarTexto(`    ${tipoOrientador} ${nomeOrientador} ${sobrenomeOrientador}.`);
     linhaAtual += 6;
-    adicionarTexto(`    ${textoCoorientadores}.`);
+    adicionarTexto(`    ${textoCoorientadores}`);
     linhaAtual += 3;
-    adicionarTexto(`    ${modalidadeExibicao} -- Instituto Federal de Educação, Ciência e Tecnologia, campus ${campus}, Programa de ${curso}, ${cidade}, BR-RS, ${ano}.`);
+    adicionarTexto(`    ${modalidadeExibicao} -- Instituto Federal de Educação, Ciência e Tecnologia, ${campus}, ${curso}, ${cidade}, BR-RS, ${ano}.`);
     linhaAtual += 3;
     adicionarTexto(textoFinal);
 
-    // Salvar PDF com nome específico e abrir em nova aba
+    const textoRodape = "Elaborada pelo Sistema de Geração Automática de Ficha Catalográfica do SIBIFRS com dados fornecidos pelo(a) autor(a).";
+    const larguraTextoRodape = larguraRetangulo; // Considera uma margem de 10px em cada lado
+    const linhasRodape = doc.splitTextToSize(textoRodape, larguraTextoRodape);
+    const alturaRodape = y + alturaRetangulo + 10;
+
+    // Configura fonte e tamanho para calcular largura do texto
+    doc.setFont("Times", "normal"); // Altera a fonte para Times
+    doc.setFontSize(10);
+    linhasRodape.forEach((linha, index) => {
+        const larguraLinha = doc.getTextWidth(linha); // Calcula a largura da linha
+        const posicaoX = x + (larguraRetangulo - larguraLinha) / 2; // Centraliza a linha
+        doc.text(linha, posicaoX, alturaRodape + index * lineSpacing);
+    });
+
     const pdfBlob = doc.output('blob');
     const pdfURL = URL.createObjectURL(pdfBlob);
-    const pdfName = `${nomeAutor}_${sobrenomeAutor.replace(/\s+/g, '_')}.pdf`;
+    const pdfName = `ficha_${nomeAutor}_${sobrenomeAutor.replace(/\s+/g, '_')}.pdf`;
     const link = document.createElement('a');
     link.href = pdfURL;
     link.download = pdfName;

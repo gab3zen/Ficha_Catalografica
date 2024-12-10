@@ -3,8 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-image: url('imagemlivro.png'); /* Imagem de fundo */
-    background-color: #121212;
+    background-image: url('fundoLivro.jpg'); /* Imagem de fundo */
     background-size: cover; /* Faz a imagem cobrir todo o fundo */
     background-position: center; /* Centraliza a imagem */
     background-repeat: no-repeat; /* Não repete a imagem*/
@@ -25,29 +24,39 @@ body {
 
 .cabecalho {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
+    justify-content: center; /* Centraliza os elementos horizontalmente */
+    align-items: center; /* Centraliza os elementos verticalmente */
+    padding: 20px 40px; /* Espaço entre a borda e os elementos */
+    gap: 20px; /* Espaço uniforme entre os elementos */
 }
 
 .cabecalho .imagem {
-    margin-right: 20px;
+    text-align: center; /* Centraliza o conteúdo internamente */
 }
 
 .cabecalho img {
-    width: 100px;
+    width: 90px; /* Mantém tamanho uniforme das imagens */
+    height: auto;
+}
+
+#logoSIBIFRS {
+    width: 120px; /* Define tamanho específico para o segundo logo */
     height: auto;
 }
 
 .cabecalho .link {
+    text-align: center; /* Centraliza os links internamente */
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    gap: 5px; /* Espaçamento uniforme entre os links */
 }
 
 .cabecalho .link a {
     text-decoration: none;
     color: #000;
     font-size: 14px;
+    white-space: nowrap; /* Evita quebra de linha */
 }
 
 .cabecalho .link a:hover {
@@ -218,6 +227,7 @@ input[type="text"], select {
     height: 25px; /* Ajuste de altura */
     width: 25px;  /* Ajuste de largura */
     margin-left: 3px;
+    cursor: pointer;
 }
 
 #ibotaoRemoverAssunto, #ibotaoRemoverCoorientador {
@@ -228,6 +238,7 @@ input[type="text"], select {
     height: 25px; /* Ajuste de altura */
     width: 25px;  /* Ajuste de largura */
     margin-left: 3px;
+    cursor: pointer;
 }
 
 #ibotaoAdicionarCoorientador img,
@@ -266,7 +277,7 @@ input[type="text"], select {
 }
 
 .botoes input[type="submit"] {
-    background-color: #1f4775;
+    background-color: rgb(1, 135, 39);
 }
 
 .botoes input[type="reset"] {
@@ -298,7 +309,7 @@ input[type="text"], select {
 }
 
 .checkbox-wrapper-34 {
-    --blue: #02488e;
+    --blue: rgb(1, 135, 39);
     --g08: #acacac;
     --g04: #cacbce;
     display: flex; /* Alinhar checkbox e label horizontalmente */
@@ -372,19 +383,62 @@ input[type="text"], select {
     flex: 1; /* Faz com que cada label ocupe o espaço disponível */
     padding: 10px 20px; /* Espaço interno nas labels */
     border: 1px solid rgba(0, 0, 0, 0.1); /* Borda leve */
+    text-align: center;
     border-radius: 10px; /* Bordas arredondadas */
     background-color: rgba(255, 255, 255, 0.6); /* Fundo semi-transparente */
     transition: background-color 0.3s, border-color 0.3s; /* Efeitos de transição */
 }
 
 /* Estilo ao selecionar */
-/* Estilo ao selecionar */
 .opcaoModalidade input[type="radio"]:checked + label {
-    background-color: #030d559b; /* Cor de fundo quando selecionado */
+    background-color: rgb(1, 135, 39); /* Cor de fundo quando selecionado */
     color: #fff; /* Cor do texto quando selecionado */
 }
 
 /* Efeito de hover */
 .opcaoModalidade label:hover {
+    background-color: rgb(1, 135, 39, 0.3); /* Efeito de hover */
+}
+
+.pos-graduacao-opcoes {
+    display: flex; /* Usar flexbox para alinhar as opções */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    gap: 10px; /* Espaço entre as opções */
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha, se necessário */
+}
+
+.pos-graduacao-opcoes input[type="radio"] {
+    display: none; /* Esconde os inputs radio */
+}
+
+.pos-graduacao-opcoes label {
+    flex: 0; /* Não força o label a ocupar todo o espaço disponível */
+    padding: 10px 20px; /* Espaço interno nas labels */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Borda leve */
+    text-align: center;
+    border-radius: 10px; /* Bordas arredondadas */
+    background-color: rgba(255, 255, 255, 0.6); /* Fundo semi-transparente */
+    transition: background-color 0.3s, border-color 0.3s; /* Efeitos de transição */
+}
+
+/* Estilo ao selecionar */
+.pos-graduacao-opcoes input[type="radio"]:checked + label {
+    background-color: #030d559b; /* Cor de fundo quando selecionado */
+    color: #fff; /* Cor do texto quando selecionado */
+}
+
+/* Efeito de hover */
+.pos-graduacao-opcoes label:hover {
     background-color: rgba(3, 32, 146, 0.3); /* Efeito de hover */
+}
+
+/* Espaçamento entre o grupo de rádio e o select */
+.pos-graduacao-container select {
+    margin-top: 20px; /* Ajuste conforme necessário */
+}
+
+input::placeholder {
+    color: rgb(77, 77, 77); /* Cor mais clara */
+    opacity: 1; /* Ajusta a opacidade se necessário */
+    font-style: italic;
 }
